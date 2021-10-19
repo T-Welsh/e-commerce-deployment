@@ -10,3 +10,6 @@
 
 ## Dev Dependancies
 - nodemon: Will automatically restart the server when changes are saved. >npm install --save-dev nodemon
+
+## Test Data
+Test users password is "password"
