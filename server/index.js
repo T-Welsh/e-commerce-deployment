@@ -11,6 +11,12 @@ app.use(express.json());
 app.use(cors());
 
 //ROUTES
+//login and register
+app.use("/auth", require("./routes/jwtauth"));
+
+//user dashboard
+
+//shop
 
 //END ROUTES
 
