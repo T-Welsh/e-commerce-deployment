@@ -64,6 +64,5 @@ module.exports = (req, res, next) => {
     }
     //validate data for login
 
-    console.log("VALIDATE INFO");
     next();
 }
