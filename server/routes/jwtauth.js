@@ -4,8 +4,9 @@ const validInfo = require("../middleware/validInfo");
 const jwtGenerator = require("../utils/jwtGenerator");
 const bcrypt = require("bcrypt");
 const authorization = require("../middleware/authorization")
+require('dotenv').config();
 
-//register user
+//register route
 router.post("/register", validInfo, async (req, res) => {
     try {
         //destructure req.body
@@ -17,24 +18,25 @@ router.post("/register", validInfo, async (req, res) => {
             return res.status(401).send("Email already registered")
         }
         //Bcrypt users password
-        const saltRounds = 12;
+        const saltRounds = process.env.SALTROUNDS;
         const salt = await bcrypt.genSalt(saltRounds);
         const bcryptPassword = await bcrypt.hash(password, salt);
         //add new user to database
         const newUser = await pool.query("INSERT INTO users (user_email, user_password, f_name, l_name, address_1, address_2, address_3, county, post_code, telephone) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *", [formattedEmail, bcryptPassword, fname, lname, address1, address2, address3, county, postcode, telephone]);
         //generate jwt token
         const token = jwtGenerator(newUser.rows[0].user_id);
-        res.json({ token });
+        res.status(201).json({ token });
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Server Error");
     }
 });
+
 //login route
-router.post("/login", validInfo, async (req, res) => {
+router.post("/login", async (req, res) => {
 try {
     //destructure req.body
-    const { email, password} = req.body;
+    const { email, password } = req.body;
     const formattedEmail = email.toLowerCase();
     //retrieve user from database
     const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [formattedEmail]);

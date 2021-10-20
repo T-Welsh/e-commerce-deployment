@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-require('dotenv').config;
+require('dotenv').config();
 
 const PORT = process.env.PORT || 5000;
 
@@ -15,7 +15,7 @@ app.use(cors());
 app.use("/auth", require("./routes/jwtauth"));
 
 //user dashboard
-
+app.use("/dashboard", require("./routes/dashboard"));
 //shop
 
 //END ROUTES

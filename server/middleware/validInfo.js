@@ -1,6 +1,6 @@
 module.exports = (req, res, next) => {
     //destructure request body
-    const { email, password, fname, lname, address1, address2, address3, county, postcode, telephone } = req.body;
+    const { email, password, fname, lname, address1, address2, address3, county, postcode, telephone} = req.body;
     //VALIDATION FUNCTIONS
     //check email is valid
     function validEmail(userEmail) {
@@ -45,7 +45,7 @@ module.exports = (req, res, next) => {
     }
 
     //validate data for register route
-    if (req.path === "/register") {
+    if(req.path === "/register") {
         if(!validEmail(email)){
             return res.status(401).json("Invalid Email");
         }
@@ -62,7 +62,27 @@ module.exports = (req, res, next) => {
             return res.status(401).json("Invalid Phone Number");
         }
     }
-    //validate data for login
+    //validate data update
+    if(req.path === "/user"){
+        if(!validEmail(email)){
+            return res.status(401).json("Invalid Email");
+        }
+        if(!validName(fname, lname)){
+            return res.status(401).json("Invalid Name");
+        }
+        if(!validAddress(address1, address2, address3, county, postcode)){
+            return res.status(401).json("Invalid Address");
+        }
+        if(!validPhone(telephone)){
+            return res.status(401).json("Invalid Phone Number");
+        }
+    }
+    //validate password update
+    if(req.path === "/user/password"){
+        if(!validPassword(password)){
+            return res.status(401).json("Invalid Password");
+        }
+    }
 
     next();
 }
