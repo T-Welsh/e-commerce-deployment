@@ -43,7 +43,7 @@ router.put("/user/password", authorization, validInfo, async (req, res) => {
             return res.status(401).json("Password is incorrect")
         }
         //bcrypt new password
-        const saltRounds = process.env.SALTROUNDS;
+        const saltRounds = 12;
         const salt = await bcrypt.genSalt(saltRounds);
         const bcryptPassword = await bcrypt.hash(password, salt);
         //update db with new password

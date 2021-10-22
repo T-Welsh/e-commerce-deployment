@@ -4,6 +4,7 @@ const validInfo = require("../middleware/validInfo");
 const jwtGenerator = require("../utils/jwtGenerator");
 const bcrypt = require("bcrypt");
 const authorization = require("../middleware/authorization")
+const passport = require("passport");
 require('dotenv').config();
 
 //register route
@@ -18,7 +19,7 @@ router.post("/register", validInfo, async (req, res) => {
             return res.status(401).send("Email already registered")
         }
         //Bcrypt users password
-        const saltRounds = process.env.SALTROUNDS;
+        const saltRounds = 12;
         const salt = await bcrypt.genSalt(saltRounds);
         const bcryptPassword = await bcrypt.hash(password, salt);
         //add new user to database
@@ -65,5 +66,29 @@ router.get("/is-verify", authorization, async(req, res) => {
         res.status(500).send("Server Error");
     }
 })
+
+//auth logout
+router.get("/logout", () => {
+    //handle logout with passport
+    res.send('logging out');
+});
+
+//passport logins
+router.get("/google", passport.authenticate('google', {
+    session: false,
+    scope: ['profile', 'email']
+}));
+
+//google redirect route
+router.get('/google/redirect', passport.authenticate('google', {session: false/*, failureRedirect: '/auth/'*/}),(req, res) => {
+    try {
+        //generate jwt token
+        const token = jwtGenerator(req.user.user_id);
+        res.json({ token });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+});
 
 module.exports = router;

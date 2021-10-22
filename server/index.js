@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const passportSetup = require('./utils/passport');
+const passport = require('passport');
 require('dotenv').config();
 
 const PORT = process.env.PORT || 5000;
@@ -10,9 +12,12 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
+//initialize passport
+app.use(passport.initialize());
+
 //ROUTES
 //login and register
-app.use("/auth", require("./routes/jwtauth"));
+app.use("/auth", require("./routes/auth"));
 
 //user dashboard
 app.use("/dashboard", require("./routes/dashboard"));
