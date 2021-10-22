@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const passportSetup = require('./utils/passport');
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const PORT = process.env.PORT || 5000;
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 5000;
 //allow access to request body
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 //initialize passport
 app.use(passport.initialize());
