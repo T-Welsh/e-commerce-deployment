@@ -58,7 +58,10 @@ CREATE TABLE invoices(
     delivery_address_2 VARCHAR(255),
     delivery_address_3 VARCHAR(255),
     delivery_county VARCHAR(100),
-    delivery_post_code VARCHAR(8)
+    delivery_post_code VARCHAR(8),
+    invoice_total MONEY NOT NULL,
+    invoice_paid BOOLEAN NOT NULL DEFAULT false,
+    shipped BOOLEAN NOT NULL DEFAULT false
 );
 
 --Create orders table
@@ -66,5 +69,13 @@ CREATE TABLE orders(
     order_id SERIAL PRIMARY KEY,
     product_id INTEGER REFERENCES products(product_id),
     order_quantity INTEGER NOT NULL,
-    invoice_id INTEGER NOT NULL REFERENCES invoices(invoice_id)
+    invoice_id INTEGER NOT NULL REFERENCES invoices(invoice_id),
+    unit_price MONEY NOT NULL
+);
+
+--create product_images table
+CREATE TABLE product_images(
+    image_id SERIAL PRIMARY KEY,
+    product_id INTEGER REFERENCES products(product_id),
+    image_address VARCHAR
 );
