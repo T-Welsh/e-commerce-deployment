@@ -1,5 +1,6 @@
 module.exports = async (req, res, next) => {
-    if(!req.user){
+    const jwtToken = req.cookies.token;
+    if(!jwtToken){
         //if user is not logged in
         res.redirect('auth/login');
     }else{

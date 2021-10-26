@@ -3,7 +3,7 @@ const pool = require("../db");
 const validInfo = require("../middleware/validInfo");
 const jwtGenerator = require("../utils/jwtGenerator");
 const bcrypt = require("bcrypt");
-const authorization = require("../middleware/authorization")
+const authorization = require("../middleware/authorization");
 const passport = require("passport");
 require('dotenv').config();
 
@@ -14,7 +14,7 @@ router.post("/register", validInfo, async (req, res) => {
         const {  email, password, fname, lname, address1, address2, address3, county, postcode, telephone } = req.body;
         const formattedEmail = email.toLowerCase();
         //check if user exists
-        const user = await pool.query("SELECT 8 FROM users WHERE user_email = $1", [formattedEmail]);
+        const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [formattedEmail]);
         if(user.rowCount > 0){
             return res.status(401).send("Email already registered")
         }
