@@ -15,7 +15,7 @@ module.exports = async (req, res, next) => {
         products.rows.forEach(product => {
             const productId = product.product_id;
             //attach imageURL to product
-            product.imageURL = `/productImages/${productId}/${productId}_1.jpg`
+            product.imageURL = `/resources/productImages/${productId}/${productId}_1.jpg`
         });
 
         req.products = products;

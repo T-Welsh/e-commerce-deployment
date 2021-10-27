@@ -159,8 +159,7 @@ router.post("/checkout", authcheck, authorization, async (req, res) => {
         //delete ordered items from cart
         await pool.query("DELETE FROM cart WHERE user_id = $1", [req.user]);
 
-        //payment info need to be handled
-
+        //handle payment
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ['card'],
             line_items: lineItems,
