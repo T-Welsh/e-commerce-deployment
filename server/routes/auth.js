@@ -70,6 +70,8 @@ router.get("/is-verify", authorization, async(req, res) => {
 //auth logout
 router.get("/logout", () => {
     //handle logout with passport
+    req.logOut();
+    //res.redirect('/');
     res.send('logging out');
 });
 

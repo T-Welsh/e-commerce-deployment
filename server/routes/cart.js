@@ -1,7 +1,9 @@
 const router = require('express').Router();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const pool = require('../db');
 const authcheck = require('../middleware/authcheck');
 const authorization = require("../middleware/authorization");
+
 
 //get cart items
 router.get("/", (req, res) => {
@@ -117,12 +119,14 @@ router.post("/checkout", authcheck, authorization, async (req, res) => {
         //destructure delivery details
         const { addressee, add1, add2, add3, county, postcode } = req.body;
         let invoiceTotal = 0;
+        let stripeToken = req.body;
+        let lineItems = [];
         //retrive cart items from db
         const orderItems = await pool.query("SELECT * FROM cart WHERE user_id = $1", [req.user]);
         if(orderItems.rowCount <= 0){
             return res.status(406).send("no items in cart");
         }
-        //check item are in stock and calculat invoice total
+        //check item are in stock
         for (i=0; i<orderItems.rowCount; i++){
             const product =  await pool.query("SELECT * FROM products WHERE product_id = $1", [orderItems.rows[i].product_id]);
             if(orderItems.rows[i].quantity > product.rows[0].units_in_stock){
@@ -130,24 +134,56 @@ router.post("/checkout", authcheck, authorization, async (req, res) => {
             }
         }
         //create new invoice in db
-        const invoice = await pool.query("INSERT INTO invoices (customer_id, addressee, delivery_address_1, delivery_address_2, delivery_address_3, delivery_county, delivery_post_code) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *", [req.user, addressee, add1, add2, add3, county, postcode]);
+        let invoice = await pool.query("INSERT INTO invoices (customer_id, addressee, delivery_address_1, delivery_address_2, delivery_address_3, delivery_county, delivery_post_code) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *", [req.user, addressee, add1, add2, add3, county, postcode]);
         //create orders in db
         for (i=0; i<orderItems.rowCount; i++){
-            const product = await (pool.query("SELECT CAST(product_price AS NUMERIC(10,4)) FROM products WHERE product_id = $1", [orderItems.rows[i].product_id]));
+            const product = await (pool.query("SELECT product_name, CAST(product_price AS NUMERIC(10,4)) FROM products WHERE product_id = $1", [orderItems.rows[i].product_id]));
             await pool.query("INSERT INTO orders (product_id, order_quantity, invoice_id, unit_price) VALUES ($1, $2, $3, $4)", [orderItems.rows[i].product_id, orderItems.rows[i].quantity, invoice.rows[0].invoice_id, product.rows[0].product_price]);
             //calculat invoice total
             invoiceTotal = invoiceTotal + (product.rows[0].product_price * orderItems.rows[i].quantity);
+            lineItems.push(
+                {
+                    price_data: {
+                        currency: 'gbp',
+                        product_data: {
+                            name: product.rows[0].product_name,
+                        }, 
+                        unit_amount: Math.trunc(product.rows[0].product_price * 100)
+                    },
+                    quantity: orderItems.rows[i].quantity
+                }
+            );
         }
         //set invoice total
-        await pool.query("UPDATE invoices SET invoice_total = $1 WHERE invoice_id = $2", [invoiceTotal, invoice.rows[0].invoice_id]);
+        invoice = await pool.query("UPDATE invoices SET invoice_total = $1 WHERE invoice_id = $2 RETURNING *", [invoiceTotal, invoice.rows[0].invoice_id]);
         //delete ordered items from cart
         await pool.query("DELETE FROM cart WHERE user_id = $1", [req.user]);
-        res.status(200).send("Order complete");
+
         //payment info need to be handled
+
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: lineItems,
+            mode: 'payment',
+            success_url: 'http://localhost:5000/cart/success.html',
+            cancel_url: 'http://localhost:5000/cart/cancel.html',
+        });
+
+        res.redirect(303, session.url);
+        
+
     } catch (err) {
         console.error(err.message);
         res.status(500).json("Server Error"); 
     }
+
+    router.get("/success", (req, res) => {
+        res.send('payment successfull')
+    });
+
+    router.get("/cancel", (req, res) => {
+        res.send('payment cancelled')
+    })
 });
 
 module.exports = router;
