@@ -1,9 +1,12 @@
 const router = require('express').Router();
+require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const pool = require('../db');
 const authcheck = require('../middleware/authcheck');
 const authorization = require("../middleware/authorization");
+const { v4: uuidv4} = require('uuid'); 
 
+const YOUR_DOMAIN = `http://localhost:${process.env.PORT}`;
 
 //get cart items
 router.get("/", (req, res) => {
@@ -113,7 +116,7 @@ router.delete("/", authorization, async(req, res) => {
         res.status(500).json("Server Error"); 
     }
 });
-
+/*
 router.post("/checkout", authcheck, authorization, async (req, res) => {
     try {
         //destructure delivery details
@@ -121,6 +124,8 @@ router.post("/checkout", authcheck, authorization, async (req, res) => {
         let invoiceTotal = 0;
         let stripeToken = req.body;
         let lineItems = [];
+        const idempotencyKey = uuidv4();
+/*
         //retrive cart items from db
         const orderItems = await pool.query("SELECT * FROM cart WHERE user_id = $1", [req.user]);
         if(orderItems.rowCount <= 0){
@@ -133,44 +138,63 @@ router.post("/checkout", authcheck, authorization, async (req, res) => {
                 return res.status(409).send(`Insufficient Stock: -${product.rows[0].product_name}`);
             }
         }
+*/       
+/* 
         //create new invoice in db
         let invoice = await pool.query("INSERT INTO invoices (customer_id, addressee, delivery_address_1, delivery_address_2, delivery_address_3, delivery_county, delivery_post_code) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *", [req.user, addressee, add1, add2, add3, county, postcode]);
+*/        
+/*
         //create orders in db
         for (i=0; i<orderItems.rowCount; i++){
-            const product = await (pool.query("SELECT product_name, CAST(product_price AS NUMERIC(10,4)) FROM products WHERE product_id = $1", [orderItems.rows[i].product_id]));
+            const product = await (pool.query("SELECT product_name, product_description, CAST(product_price AS NUMERIC(10,4)) FROM products WHERE product_id = $1", [orderItems.rows[i].product_id]));
             await pool.query("INSERT INTO orders (product_id, order_quantity, invoice_id, unit_price) VALUES ($1, $2, $3, $4)", [orderItems.rows[i].product_id, orderItems.rows[i].quantity, invoice.rows[0].invoice_id, product.rows[0].product_price]);
             //calculat invoice total
             invoiceTotal = invoiceTotal + (product.rows[0].product_price * orderItems.rows[i].quantity);
+            //get product image for cart
+            imageURL = `${YOUR_DOMAIN}/productImages/${orderItems.rows[i].product_id}/${orderItems.rows[i].product_id}_1.jpg`
             lineItems.push(
                 {
                     price_data: {
                         currency: 'gbp',
                         product_data: {
                             name: product.rows[0].product_name,
+                            description: product.rows[0].product_desription,
+                            images: [imageURL],
+                            metadata: {
+                                product_id: orderItems.rows[i].product_id
+                            },
                         }, 
-                        unit_amount: Math.trunc(product.rows[0].product_price * 100)
+                        unit_amount_decimal: Math.trunc(product.rows[0].product_price * 100),
+                        tax_behavior: "inclusive"
                     },
                     quantity: orderItems.rows[i].quantity
-                }
+                },
             );
         }
+*/   
+/*     
         //set invoice total
         invoice = await pool.query("UPDATE invoices SET invoice_total = $1 WHERE invoice_id = $2 RETURNING *", [invoiceTotal, invoice.rows[0].invoice_id]);
         //delete ordered items from cart
         await pool.query("DELETE FROM cart WHERE user_id = $1", [req.user]);
-
+*/
+/*
         //handle payment
         const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
             line_items: lineItems,
+            metadata: {
+                invoice_number: invoice.rows[0].invoice_id,
+            },
+            payment_method_types : ['card'],
             mode: 'payment',
-            success_url: 'http://localhost:5000/cart/success.html',
-            cancel_url: 'http://localhost:5000/cart/cancel.html',
+            success_url: `${YOUR_DOMAIN}/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${YOUR_DOMAIN}/cancel`,
+            //idempotencyKey: idempotencyKey
         });
 
         res.redirect(303, session.url);
-        
-
+*/        
+/*
     } catch (err) {
         console.error(err.message);
         res.status(500).json("Server Error"); 
@@ -184,5 +208,5 @@ router.post("/checkout", authcheck, authorization, async (req, res) => {
         res.send('payment cancelled')
     })
 });
-
+*/
 module.exports = router;

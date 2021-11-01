@@ -55,12 +55,14 @@ module.exports = (req, res, next) => {
         if(!validName(fname, lname)){
             return res.status(401).json("Invalid Name");
         }
+/*
         if(!validAddress(address1, address2, address3, county, postcode)){
             return res.status(401).json("Invalid Address");
         }
         if(!validPhone(telephone)){
             return res.status(401).json("Invalid Phone Number");
         }
+*/
     }
     //validate data update
     if(req.path === "/user"){

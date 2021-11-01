@@ -33,6 +33,8 @@ app.use("/dashboard", require("./routes/dashboard"));
 app.use("/shop", require("./routes/shop"));
 //cart
 app.use("/cart", require("./routes/cart"));
+//checkout
+app.use("/checkout", require("./routes/checkout"));
 //END ROUTES
 
 app.listen(PORT, () => {
