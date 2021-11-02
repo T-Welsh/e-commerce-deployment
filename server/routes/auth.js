@@ -52,7 +52,8 @@ try {
     }
     //issue jwt token
     const token = jwtGenerator(user.rows[0].user_id);
-    res.cookie('token', token, {httpOnly: true, sameSite: 'strict'}).send('cookie set');
+    //res.cookie('token', token, {httpOnly: true, sameSite: 'strict'}).send('cookie set');
+    res.status(200).json({token});
 } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

@@ -15,7 +15,6 @@ function App() {
   //retrive JWT token from local storage and send to server for verification
   const verifyAuth = async () => {
     const token = localStorage.getItem("token");
-    console.log(`Token is ${token}`);
 
     const response = await fetch("http://localhost:5000/auth/is-verify", {
                 method: "GET",

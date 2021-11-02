@@ -15,12 +15,12 @@ const Register = ({setAuth}) => {
     };
 
     const onSubmitForm = async (e) => {
+        //prevent page refresh
         e.preventDefault()
 
         try {
             const body = { email, password, fname, lname }
-            const abody = JSON.stringify(body);
-            console.log(abody);
+
             const response = await fetch("http://localhost:5000/auth/register", {
                 method: "POST",
                 headers: {"content-type" : "application/json;charset=UTF-8"},
@@ -32,7 +32,6 @@ const Register = ({setAuth}) => {
             //document.cookie = `token=${parseRes.token}`;
             localStorage.setItem("token", parseRes.token);
             setAuth(true);
-            console.log(parseRes.token);
             
         } catch (err) {
             console.error(err.message);
