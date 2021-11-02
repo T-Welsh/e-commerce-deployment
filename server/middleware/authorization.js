@@ -4,7 +4,8 @@ require("dotenv").config();
 module.exports = async (req, res, next) => {
     try {
         //destructure token from request header
-        const jwtToken = req.cookies.token;
+        //const jwtToken = req.cookies.token;
+        const jwtToken = req.headers.token;
         // set user login status for cart path
         if(req.originalUrl === "/cart"){
             if(!jwtToken){

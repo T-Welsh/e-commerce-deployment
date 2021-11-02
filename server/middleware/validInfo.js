@@ -46,6 +46,7 @@ module.exports = (req, res, next) => {
 
     //validate data for register route
     if(req.path === "/register") {
+
         if(!validEmail(email)){
             return res.status(401).json("Invalid Email");
         }
@@ -55,6 +56,7 @@ module.exports = (req, res, next) => {
         if(!validName(fname, lname)){
             return res.status(401).json("Invalid Name");
         }
+
 /*
         if(!validAddress(address1, address2, address3, county, postcode)){
             return res.status(401).json("Invalid Address");

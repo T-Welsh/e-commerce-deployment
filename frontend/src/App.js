@@ -12,6 +12,30 @@ function App() {
     setIsAuthenticated(boolean)
   };
 
+  //retrive JWT token from local storage and send to server for verification
+  const verifyAuth = async () => {
+    const token = localStorage.getItem("token");
+    console.log(`Token is ${token}`);
+
+    const response = await fetch("http://localhost:5000/auth/is-verify", {
+                method: "GET",
+                headers: {
+                  "content-type" : "application/json;charset=UTF-8",
+                  "token" : token,
+                },
+                mode: 'cors',
+            });
+
+            const parseRes = await response.json();
+            // set auth state true if server successfully verifies JWT
+            if(parseRes === true){
+              setAuth(true);
+            }
+
+  };
+
+  verifyAuth();
+
   return (
     <Fragment>
       <Router>

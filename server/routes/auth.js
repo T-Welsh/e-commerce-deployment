@@ -26,7 +26,8 @@ router.post("/register", validInfo, async (req, res) => {
         const newUser = await pool.query("INSERT INTO users (user_email, user_password, f_name, l_name, address_1, address_2, address_3, county, post_code, telephone) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *", [formattedEmail, bcryptPassword, fname, lname, address1, address2, address3, county, postcode, telephone]);
         //generate jwt token
         const token = jwtGenerator(newUser.rows[0].user_id);
-        res.status(201).cookie('token', token, {httpOnly: true, sameSite: 'strict'}).send('cookie set');
+        //res.cookie('token', token, {httpOnly: true, sameSite: 'strict'}).json('cookie set');
+        res.status(201).json({token});
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Server Error");

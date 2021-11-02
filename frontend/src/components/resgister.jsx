@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from "react";
 
-const Register = () => {
+const Register = ({setAuth}) => {
     const [inputs, setInputs] = useState({
         email: "",
         password: "",
@@ -14,18 +14,26 @@ const Register = () => {
         setInputs({...inputs, [e.target.name] : e.target.value})
     };
 
-    const onSUbmitForm = async (e) => {
+    const onSubmitForm = async (e) => {
         e.preventDefault()
+
         try {
             const body = { email, password, fname, lname }
+            const abody = JSON.stringify(body);
+            console.log(abody);
             const response = await fetch("http://localhost:5000/auth/register", {
                 method: "POST",
-                headers: {"Content-Type" : "application/json"},
+                headers: {"content-type" : "application/json;charset=UTF-8"},
+                mode: 'cors',
                 body: JSON.stringify(body)
             });
 
-            const parseRes = await response.json()
-            console.log(parseRes);
+            const parseRes = await response.json();
+            //document.cookie = `token=${parseRes.token}`;
+            localStorage.setItem("token", parseRes.token);
+            setAuth(true);
+            console.log(parseRes.token);
+            
         } catch (err) {
             console.error(err.message);
         }
@@ -35,7 +43,7 @@ const Register = () => {
 
         <Fragment>
             <h1>Register</h1>
-            <form onSubmit={onSUbmitForm}>
+            <form onSubmit={onSubmitForm}>
                 <input type="email" name="email" placeholder="email" value={email} onChange={e => onChange(e)} />
                 <br/>
                 <input type="password" name="password" placeholder="password" value={password} onChange={e => onChange(e)} />
