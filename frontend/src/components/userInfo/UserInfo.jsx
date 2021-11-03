@@ -13,6 +13,9 @@ const UserInfo = () => {
         telephone: ""
     });
 
+    const [ inputs, setInputs] = useState(user)
+    const { email, fname, lname, address1, address2, address3, county, postcode, telephone } = inputs;
+
     const getUser = async () => {
         try {
             const response = await fetch("http://localhost:5000/dashboard/user", {
@@ -36,6 +39,19 @@ const UserInfo = () => {
                     telephone: parseRes.telephone
                 }
             );
+            setInputs(
+                {
+                    email: parseRes.user_email,
+                    fname: parseRes.f_name,
+                    lname: parseRes.l_name,
+                    address1: parseRes.address_1,
+                    address2: parseRes.address_2,
+                    address3: parseRes.address_3,
+                    county: parseRes.county,
+                    postcode: parseRes.post_code,
+                    telephone: parseRes.telephone
+                }
+            );
         } catch (err) {
             console.error(err.message);
         }
@@ -46,29 +62,78 @@ const UserInfo = () => {
     }, [])
     //console.log(user);
 
-    const [isEdit, setIsEdit] = useState(false);
-
-    const setEdit = (boolean) => {
-        setIsEdit(boolean)
+    const [isAddressEdit, setIsAddressEdit] = useState(false);
+    const setAddressEdit = (boolean) => {
+        setIsAddressEdit(boolean)
     }
 
+    const [isPersonalEdit, setIsPersonalEdit] = useState(false);
+
+    const setPersonalEdit = (boolean) => {
+        setIsPersonalEdit(boolean)
+    }
+
+    const onChange = (e) => {
+        setInputs({...inputs, [e.target.name] : e.target.value})
+        console.log(inputs);
+    };
+
+    //TODO: add onSubmit function to save button
+    
     return(
 
         <Fragment>
-            {isEdit ? 
+            <h1>Dashboard</h1>
+            {isPersonalEdit ?
                 <>
-                <p>Edit form</p>
-                <button onClick={() => { setEdit(false); } }>Edit Details</button>
+                <div>
+                    <h2>Personal Details</h2>
+                    <form>
+                        <input type="text  " name="fname" placeholder="First Name" value={fname} onChange={e => onChange(e)} />
+                        <br/>
+                        <input type="text" name="lname" placeholder="Surname" value={lname} onChange={e => onChange(e)} />
+                        <br/>
+                        <input type="email" name="email" placeholder="email" value={email} onChange={e => onChange(e)} />
+                        <br/>
+                        <input type="text  " name="telephone" placeholder="Phone Number" value={telephone} onChange={e => onChange(e)} />
+                        <br/>
+                    </form>
+                    <button onClick={() => { setPersonalEdit(false); console.log(inputs);} }>Save</button>
+                </div>
                 </>
             :
                 <>
-                <h1>Dashboard</h1><div>
+                <div>
                     <h2>Personal Details</h2>
                     <p>{user.fname}</p>
                     <p>{user.lname}</p>
                     <p>{user.email}</p>
                     <p>{user.telephone}</p>
+                    <button onClick={() => { setPersonalEdit(true); console.log(inputs);} }>Edit Details</button>
                 </div>
+                </>
+            }
+            {isAddressEdit ? 
+                <>
+                <div>
+                    <h2>Address</h2>
+                    <form>
+                        <input type="text" name="address1" placeholder="address1" value={address1} onChange={e => onChange(e)} />
+                        <br/>
+                        <input type="text  " name="address2" placeholder="address2" value={address2} onChange={e => onChange(e)} />
+                        <br/>
+                        <input type="text" name="address3" placeholder="address3" value={address3} onChange={e => onChange(e)} />
+                        <br/>
+                        <input type="text" name="county" placeholder="county" value={county} onChange={e => onChange(e)} />
+                        <br/>
+                        <input type="text" name="postcode" placeholder="postcode" value={postcode} onChange={e => onChange(e)} />
+                        <br/>
+                    </form>
+                    <button onClick={() => { setAddressEdit(false); } }>Save</button>
+                </div>
+                </>
+            :
+                <>
                 <div>
                     <h2>Address</h2>
                     <p>{user.address1}</p>
@@ -76,26 +141,10 @@ const UserInfo = () => {
                     <p>{user.address3}</p>
                     <p>{user.county}</p>
                     <p>{user.postcode}</p>
+                    <button onClick={() => { setAddressEdit(true); } }>Edit Details</button>
                 </div>
-                <button onClick={() => { setEdit(true); } }>Edit Details</button>
                 </>
             }
-            <h1>Dashboard</h1><div>
-                <h2>Personal Details</h2>
-                <p>{user.fname}</p>
-                <p>{user.lname}</p>
-                <p>{user.email}</p>
-                <p>{user.telephone}</p>
-            </div>
-            <div>
-                <h2>Address</h2>
-                <p>{user.address1}</p>
-                <p>{user.address2}</p>
-                <p>{user.address3}</p>
-                <p>{user.county}</p>
-                <p>{user.postcode}</p>
-            </div>
-            <button onClick={()=> {setEdit(true)}}>Edit Details</button>
         </Fragment>
     )
  
