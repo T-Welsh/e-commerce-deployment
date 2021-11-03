@@ -1,4 +1,5 @@
 import React, {Fragment, useState} from "react";
+import {Link} from "react-router-dom"
 
 
 const Login = ({setAuth}) => {
@@ -32,7 +33,7 @@ const Login = ({setAuth}) => {
             //document.cookie = `token=${parseRes.token}`;
             localStorage.setItem("token", parseRes.token);
             setAuth(true);
-            
+
         } catch (err) {
             console.error(err.message);
         }
@@ -48,6 +49,7 @@ const Login = ({setAuth}) => {
                 <br/>
                 <button type="submit">Login</button>
             </form>
+            <Link to="/register">Register</Link>
         </Fragment>
     );
 }; 
