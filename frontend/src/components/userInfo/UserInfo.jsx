@@ -75,10 +75,37 @@ const UserInfo = () => {
 
     const onChange = (e) => {
         setInputs({...inputs, [e.target.name] : e.target.value})
-        console.log(inputs);
+        //console.log(inputs);
     };
 
     //TODO: add onSubmit function to save button
+    const onSubmitForm = async (e) =>{
+        e.preventDefault()
+        try {
+            const body = { email, fname, lname, address1, address2, address3, county, postcode, telephone }
+            console.log(body);
+
+            const response = await fetch("http://localhost:5000/dashboard/user", {
+                method: "PUT",
+                headers: {
+                    "content-type" : "application/json;charset=UTF-8",
+                    token: localStorage.token
+                },
+                mode: 'cors',
+                body: JSON.stringify(body)
+            });
+
+            const parseRes = await response.json();
+            console.log(parseRes);
+            getUser();
+            setPersonalEdit(false);
+            setAddressEdit(false);
+
+            
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
     
     return(
 
@@ -88,7 +115,7 @@ const UserInfo = () => {
                 <>
                 <div>
                     <h2>Personal Details</h2>
-                    <form>
+                    <form onSubmit={onSubmitForm}>
                         <input type="text  " name="fname" placeholder="First Name" value={fname} onChange={e => onChange(e)} />
                         <br/>
                         <input type="text" name="lname" placeholder="Surname" value={lname} onChange={e => onChange(e)} />
@@ -97,8 +124,8 @@ const UserInfo = () => {
                         <br/>
                         <input type="text  " name="telephone" placeholder="Phone Number" value={telephone} onChange={e => onChange(e)} />
                         <br/>
+                        <button type='submit'>Save</button>
                     </form>
-                    <button onClick={() => { setPersonalEdit(false); console.log(inputs);} }>Save</button>
                 </div>
                 </>
             :
@@ -117,7 +144,7 @@ const UserInfo = () => {
                 <>
                 <div>
                     <h2>Address</h2>
-                    <form>
+                    <form onSubmit={onSubmitForm}>
                         <input type="text" name="address1" placeholder="address1" value={address1} onChange={e => onChange(e)} />
                         <br/>
                         <input type="text  " name="address2" placeholder="address2" value={address2} onChange={e => onChange(e)} />
@@ -128,8 +155,8 @@ const UserInfo = () => {
                         <br/>
                         <input type="text" name="postcode" placeholder="postcode" value={postcode} onChange={e => onChange(e)} />
                         <br/>
+                        <button type='submit'>Save</button>
                     </form>
-                    <button onClick={() => { setAddressEdit(false); } }>Save</button>
                 </div>
                 </>
             :

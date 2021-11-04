@@ -20,10 +20,10 @@ router.get("/user", authorization, async (req, res) => {
 router.put("/user", authorization, validInfo,  async (req, res) => {
     try {
         //destructure request body
-        const { email, fname, lname, address1, address2, address3, county, postcode, phone } = req.body;
+        const { email, fname, lname, address1, address2, address3, county, postcode, telephone } = req.body;
         const formattedEmail = email.toLowerCase();
         //update recored and send response
-        await pool.query("UPDATE users SET user_email = $1, f_name = $2, l_name = $3, address_1 = $4, address_2 = $5, address_3 = $6, county = $7, post_code = $8, telephone = $9 WHERE user_id = $10", [formattedEmail, fname, lname, address1, address2, address3, county, postcode, phone, req.user])
+        await pool.query("UPDATE users SET user_email = $1, f_name = $2, l_name = $3, address_1 = $4, address_2 = $5, address_3 = $6, county = $7, post_code = $8, telephone = $9 WHERE user_id = $10", [formattedEmail, fname, lname, address1, address2, address3, county, postcode, telephone, req.user])
         .then (res.status(200).json("Account details updated"));
     } catch (err) {
         console.error(err.message);
