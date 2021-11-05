@@ -75,7 +75,6 @@ const UserInfo = () => {
 
     const onChange = (e) => {
         setInputs({...inputs, [e.target.name] : e.target.value})
-        //console.log(inputs);
     };
 
     //TODO: add onSubmit function to save button
@@ -83,7 +82,6 @@ const UserInfo = () => {
         e.preventDefault()
         try {
             const body = { email, fname, lname, address1, address2, address3, county, postcode, telephone }
-            console.log(body);
 
             const response = await fetch("http://localhost:5000/dashboard/user", {
                 method: "PUT",
@@ -96,7 +94,6 @@ const UserInfo = () => {
             });
 
             const parseRes = await response.json();
-            console.log(parseRes);
             getUser();
             setPersonalEdit(false);
             setAddressEdit(false);
@@ -136,7 +133,7 @@ const UserInfo = () => {
                     <p>{user.lname}</p>
                     <p>{user.email}</p>
                     <p>{user.telephone}</p>
-                    <button onClick={() => { setPersonalEdit(true); console.log(inputs);} }>Edit Details</button>
+                    <button onClick={() => { setPersonalEdit(true);} }>Edit Details</button>
                 </div>
                 </>
             }

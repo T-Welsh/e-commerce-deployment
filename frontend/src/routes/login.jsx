@@ -1,8 +1,9 @@
 import React, {Fragment, useState} from "react";
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
+import Header from "../components/header/Header";
 
 
-const Login = ({setAuth}) => {
+const Login = ({isAuthenticated, setAuth}) => {
 
     const [inputs, setInputs] = useState({
         email: "",
@@ -41,6 +42,7 @@ const Login = ({setAuth}) => {
 
     return (
         <Fragment>
+            <Header isAuthenticated={isAuthenticated} setAuth={setAuth}/>
             <h1>Login</h1>
             <form onSubmit={onSubmitForm}>
                 <input type="email" name="email" placeholder="email" value={email} onChange={e => onChange(e)} />
