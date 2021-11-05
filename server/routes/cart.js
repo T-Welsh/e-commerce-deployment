@@ -24,8 +24,9 @@ router.post("/", authorization, async (req, res) => {
         //destructure request body
         const loggedIn = req.loggedIn;
         const { productid, quantity, cart } = req.body;
+
         if(loggedIn === false){
-            //creat object for new cart item
+            //create object for new cart item
             const cartItem = {
                 product: productid,
                 quantity: quantity
@@ -34,7 +35,7 @@ router.post("/", authorization, async (req, res) => {
             let productExists = false;
             cart.forEach(element => {
                 //if item is already in cart then update quantity
-                if(element.product_id === productid){
+                if(element.product === productid){
                     element.quantity = element.quantity + quantity;
                     productExists = true;
                     res.status(200).json(cart);
