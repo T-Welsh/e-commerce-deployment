@@ -1,3 +1,4 @@
+import './productList.css'
 import React, { Fragment, useEffect, useState } from 'react';
 import ProductOverview from '../productOverview/ProductOverview';
 
@@ -35,7 +36,7 @@ const ProductList = () => {
         <Fragment>
             {productInfo.map(element => {
                 return(
-                    <div style={{backgroundColor: 'lightgray'}}>
+                    <div className="productContainer"/*style={{backgroundColor: 'lightgray'}}*/ key={element.product_id}>
                         <ProductOverview productdetails = {element} />
                     </div>
                 )

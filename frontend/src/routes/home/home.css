@@ -1,0 +1,10 @@
+#homecontainer{
+    display: flex
+}
+
+.contentBody{
+    position: relative;
+    width: 75%;
+    float: right;
+    height: 100vh;
+}

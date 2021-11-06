@@ -4,7 +4,7 @@ import Dashboard from './routes/dashboard';
 import Login from './routes/login';
 import Register from './routes/resgister';
 import { Fragment, useState, useEffect } from 'react';
-import Home from './routes/home';
+import Home from './routes/home/home';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

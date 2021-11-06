@@ -1,0 +1,28 @@
+#header{
+    background-color: lightslategrey;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+#companyName{
+    margin-left: 2rem;
+}
+
+#header ul{
+    list-style: none;
+    display:  flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#header li {
+    margin-right: 1rem;
+}
+
+#header a{
+    color: white;
+}
