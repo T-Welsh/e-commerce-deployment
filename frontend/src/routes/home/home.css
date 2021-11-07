@@ -4,7 +4,14 @@
 
 .contentBody{
     position: relative;
-    width: 75%;
+    width: 85%;
     float: right;
     height: 100vh;
+}
+
+#productListContainer{
+    display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
 }

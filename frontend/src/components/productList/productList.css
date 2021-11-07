@@ -1,5 +1,6 @@
 .productContainer{
-    
+    width: 25rem;
+    min-width: 25rem;
     background-color: lightgrey;
     margin: 1rem;
     display: flex;

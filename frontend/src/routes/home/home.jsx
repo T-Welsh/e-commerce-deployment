@@ -13,7 +13,9 @@ const Home = ({isAuthenticated, setAuth}) => {
             <Searchbar/>
             <div className="contentBody">
                 <h1>Home Page</h1>
-                <ProductList/>
+                <div id='productListContainer'>
+                    <ProductList/>
+                </div>
             </div>
         </div>
         </Fragment>
