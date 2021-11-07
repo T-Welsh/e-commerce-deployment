@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import ProductOverview from '../productOverview/ProductOverview';
 
 
-const ProductList = () => {
+const ProductList = ({searchTerm, department}) => {
 
     const [productInfo, setProductInfo] = useState([]);    
 
@@ -15,13 +15,14 @@ const ProductList = () => {
                         method: "GET",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
+                        "category": department,
+                        "productname": searchTerm
                         },
                         mode: 'cors',
                     });
 
                     const parseRes = await response.json();
                     setProductInfo(parseRes);
-                    console.log(parseRes);
 
         } catch (err) {
             console.error(err.message);
@@ -29,7 +30,7 @@ const ProductList = () => {
         
         };
         getProducts();
-    }, []);
+    }, [searchTerm, department]);
 
 
     return(

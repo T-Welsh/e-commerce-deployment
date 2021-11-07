@@ -3,18 +3,21 @@ import React, {Fragment, useState} from "react";
 import Header from '../../components/header/Header';
 import ProductList from "../../components/productList/ProductList";
 import Searchbar from "../../components/searchbar/Searchbar";
+import Footer from '../../components/footer/Footer';
 
 const Home = ({isAuthenticated, setAuth}) => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [department, setDepartment] = useState('');
 
     return (
         <Fragment>
         <div id='homeContainer'>
             <Header isAuthenticated={isAuthenticated} setAuth={setAuth}/>
-            <Searchbar/>
+            <Searchbar setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
             <div className="contentBody">
-                <h1>Home Page</h1>
+                <h2>All Departments</h2>
                 <div id='productListContainer'>
-                    <ProductList/>
+                    <ProductList searchTerm={searchTerm} department={department}/>
                 </div>
             </div>
         </div>

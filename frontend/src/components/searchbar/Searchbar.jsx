@@ -3,22 +3,38 @@ import './Searchbar.css';
 
 
 
-const Searchbar = () => {
+const Searchbar = ({setSearchTerm, setDepartment}) => {
 
-    
+    const handleClick = (category) => {
+        setDepartment(category);
+    }
+    const [input, setInput] = useState()
+
+    const onChange = (e) => {
+        setInput(e.target.value);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setSearchTerm(input);
+    }
 
     return(
         <Fragment>
             <aside className="sidebar">
                 <nav className="nav">
-                    <input type="text" name="" id="" />
+                    <form onSubmit={handleSubmit}>
+                        <input type="search" name="search" id="search" onChange={e => onChange(e)}/>
+                        <input type="submit" value="Search"/>
+                    </form>
                     <ul>
-                        <li>Household</li>
-                        <li>Kitchen</li>
-                        <li>Bathroom</li>
-                        <li>Outdoor</li>
-                        <li>Accessories</li>
-                        <li>Stationery</li>
+                        <li><button onClick={() => {handleClick('')}}>All Departments</button></li>
+                        <li><button onClick={() => {handleClick('household')}}>Household</button></li>
+                        <li><button onClick={() => {handleClick('kitchen')}}>Kitchen</button></li>
+                        <li><button onClick={() => {handleClick('bathroom')}}>Bathroom</button></li>
+                        <li><button onClick={() => {handleClick('outdoor')}}>Outdoor</button></li>
+                        <li><button onClick={() => {handleClick('accessories')}}>Accessories</button></li>
+                        <li><button onClick={() => {handleClick('stationary')}}>Stationary</button></li>
                     </ul>
                 </nav>
             </aside>
