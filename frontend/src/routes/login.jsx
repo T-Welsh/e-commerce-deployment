@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import Header from "../components/header/Header";
 
 
-const Login = ({isAuthenticated, setAuth}) => {
+const Login = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
 
     const [inputs, setInputs] = useState({
         email: "",
@@ -42,7 +42,7 @@ const Login = ({isAuthenticated, setAuth}) => {
 
     return (
         <Fragment>
-            <Header isAuthenticated={isAuthenticated} setAuth={setAuth}/>
+            <Header isAuthenticated={isAuthenticated} setAuth={setAuth}  setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
             <h1>Login</h1>
             <form onSubmit={onSubmitForm}>
                 <input type="email" name="email" placeholder="email" value={email} onChange={e => onChange(e)} />

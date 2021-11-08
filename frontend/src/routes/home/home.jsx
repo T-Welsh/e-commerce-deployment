@@ -5,17 +5,17 @@ import ProductList from "../../components/productList/ProductList";
 import Searchbar from "../../components/searchbar/Searchbar";
 import Footer from '../../components/footer/Footer';
 
-const Home = ({isAuthenticated, setAuth}) => {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [department, setDepartment] = useState('');
+const Home = ({isAuthenticated, setAuth, searchTerm, setSearchTerm, department, setDepartment }) => {
+    //const [searchTerm, setSearchTerm] = useState('');
+    //const [department, setDepartment] = useState('');
 
     return (
         <Fragment>
         <div id='homeContainer'>
-            <Header isAuthenticated={isAuthenticated} setAuth={setAuth}/>
+            <Header isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
             <Searchbar setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
             <div className="contentBody">
-                <h2>All Departments</h2>
+                <h2>{department === '' ? "All Departments": (`${department} ${searchTerm === '' ? searchTerm : `> ${searchTerm}`}`)}</h2>
                 <div id='productListContainer'>
                     <ProductList searchTerm={searchTerm} department={department}/>
                 </div>

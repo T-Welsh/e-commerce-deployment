@@ -1,8 +1,8 @@
 import './Header.css';
 import React, { Fragment, useEffect, useState } from 'react';
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
-const Header = ({isAuthenticated, setAuth}) => {
+const Header = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
 
     const logout = (e) => {
         //prevent page refresh
@@ -11,14 +11,19 @@ const Header = ({isAuthenticated, setAuth}) => {
         setAuth(false);
     }
 
+    const handleShopReset = () => {
+        setSearchTerm('');
+        setDepartment('');
+    }
+
 
 
     return(
         <Fragment>
             <div id='header'>
-                <h1 id='companyName' ><a href='/home'>The Suffolk Company</a></h1>
+                <h1 id='companyName' ><NavLink to='/home' onClick={() => {handleShopReset()}}>The Suffolk Company</NavLink></h1>
                 <ul>
-                    <li><Link to="/home">Shop</Link></li>
+                    <li><Link to="/home" onClick={()=>{handleShopReset()}}>Shop</Link></li>
                     <li>{isAuthenticated ? <Link to="/login" onClick={ e => logout(e)}>Logout</Link> : <Link to="/login">Login or Register</Link>}</li>
                     <li><Link to="/dashboard">Dashboard</Link></li>
                 </ul>

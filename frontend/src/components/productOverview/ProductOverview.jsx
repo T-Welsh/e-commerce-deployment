@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 
 const ProductOverview = (productDetails) => {
@@ -45,9 +46,9 @@ const ProductOverview = (productDetails) => {
 
     return(
         <Fragment>
-            <img src={`http://localhost:5000/productImages/${id}/${id}_1.jpg`} alt={name} style={{maxWidth: "100px", maxHeight: "100px"} }/>
-            <h3>{name}</h3>
-            <p>{price}</p>
+                <img src={`http://localhost:5000/productImages/${id}/${id}_1.jpg`} alt={name} style={{maxWidth: "100px", maxHeight: "100px"} }/>
+                <h3>{name}</h3>
+                <p>{price}</p>
             <button onClick={e => addCart(e)}>Add to Cart</button>
         </Fragment>
     )

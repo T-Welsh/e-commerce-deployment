@@ -5,6 +5,7 @@ import Login from './routes/login';
 import Register from './routes/resgister';
 import { Fragment, useState, useEffect } from 'react';
 import Home from './routes/home/home';
+import Product from './routes/product/product';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -12,6 +13,9 @@ function App() {
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean)
   };
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [department, setDepartment] = useState('');
 
   //retrive JWT token from local storage and send to server for verification
   useEffect(() => {
@@ -48,10 +52,17 @@ function App() {
         <div className="container">
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/home" />} />
-            <Route exact path="/home" render={props => (<Home {...props} isAuthenticated={isAuthenticated} setAuth={setAuth}/>) } ></Route>
-            <Route exact path="/login" render={props => !isAuthenticated ? (<Login {...props} setAuth={setAuth}/>) : (<Redirect to="/Home" />)} />
+
+            <Route exact path="/home" render={props => (<Home {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} searchTerm={searchTerm} setSearchTerm={setSearchTerm}department={department} setDepartment={setDepartment}/>) } ></Route>
+
+            <Route exact path="/login" render={props => !isAuthenticated ? (<Login {...props} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>) : (<Redirect to="/Home" />)} />
+
             <Route exact path="/register" render={props => !isAuthenticated ? (<Register {...props} setAuth={setAuth}/>) : (<Redirect to="/dashboard" />)}/>
-            <Route exact path="/dashboard" render={props => isAuthenticated ? (<Dashboard {...props} isAuthenticated={isAuthenticated} setAuth={setAuth}/>) : (<Redirect to="/login" />)}/>
+
+            <Route exact path="/dashboard" render={props => isAuthenticated ? (<Dashboard {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>) : (<Redirect to="/login" />)}/>
+
+            <Route exact path={`/product:id`} render={props => (<Product {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} department={department}/>)}/>
+
           </Switch>
         </div>
       </Router>

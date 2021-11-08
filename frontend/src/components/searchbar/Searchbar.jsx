@@ -29,12 +29,12 @@ const Searchbar = ({setSearchTerm, setDepartment}) => {
                     </form>
                     <ul>
                         <li><button onClick={() => {handleClick('')}}>All Departments</button></li>
-                        <li><button onClick={() => {handleClick('household')}}>Household</button></li>
-                        <li><button onClick={() => {handleClick('kitchen')}}>Kitchen</button></li>
-                        <li><button onClick={() => {handleClick('bathroom')}}>Bathroom</button></li>
-                        <li><button onClick={() => {handleClick('outdoor')}}>Outdoor</button></li>
-                        <li><button onClick={() => {handleClick('accessories')}}>Accessories</button></li>
-                        <li><button onClick={() => {handleClick('stationary')}}>Stationary</button></li>
+                        <li><button onClick={() => {handleClick('Household')}}>Household</button></li>
+                        <li><button onClick={() => {handleClick('Kitchen')}}>Kitchen</button></li>
+                        <li><button onClick={() => {handleClick('Bathroom')}}>Bathroom</button></li>
+                        <li><button onClick={() => {handleClick('Outdoor')}}>Outdoor</button></li>
+                        <li><button onClick={() => {handleClick('Accessories')}}>Accessories</button></li>
+                        <li><button onClick={() => {handleClick('Stationary')}}>Stationary</button></li>
                     </ul>
                 </nav>
             </aside>

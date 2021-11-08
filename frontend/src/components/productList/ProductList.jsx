@@ -1,5 +1,6 @@
 import './productList.css'
 import React, { Fragment, useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import ProductOverview from '../productOverview/ProductOverview';
 
 
@@ -37,9 +38,11 @@ const ProductList = ({searchTerm, department}) => {
         <Fragment>
             {productInfo.map(element => {
                 return(
-                    <div className="productContainer"/*style={{backgroundColor: 'lightgray'}}*/ key={element.product_id}>
-                        <ProductOverview productdetails = {element} />
+                    <NavLink to={`/product${element.product_id}`} key={element.product_id}>
+                    <div className="productContainer">
+                            <ProductOverview productdetails = {element} />
                     </div>
+                    </NavLink>
                 )
             })}
         </Fragment>

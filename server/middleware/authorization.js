@@ -8,7 +8,9 @@ module.exports = async (req, res, next) => {
         const jwtToken = req.headers.token;
         // set user login status for cart path
         if(req.originalUrl === "/cart"){
+            console.log(jwtToken);
             if(!jwtToken){
+                console.log('check1');
                 req.loggedIn = false;
                 return next();
             }
