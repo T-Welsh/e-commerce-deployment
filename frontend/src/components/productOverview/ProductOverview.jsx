@@ -1,12 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-
 
 const ProductOverview = (productDetails) => {
 
     const id = productDetails.productdetails.product_id;
     const name = productDetails.productdetails.product_name;
     const price = productDetails.productdetails.product_price;
+    const token = localStorage.getItem("token") || null;
     //const imageURL = productDetails.productdetails.imageURL;
     //"https://i.imgur.com/1NQuWpK.jpeg"
     //`/productImages/${id}/${id}_1.jpg`   frontend image address
@@ -30,7 +29,7 @@ const ProductOverview = (productDetails) => {
                         method: "POST",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
-                        "token": localStorage.getItem("token")
+                        "token": token
                         },
                         mode: 'cors',
                         body: JSON.stringify(body)

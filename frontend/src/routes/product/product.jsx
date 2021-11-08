@@ -1,7 +1,7 @@
 import './product.css';
 import React, {Fragment, useEffect, useState} from "react";
 import Header from "../../components/header/Header";
-import {Link, NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Product = ({isAuthenticated, setAuth, match, department}) => {
     const {params: { id } } = match;

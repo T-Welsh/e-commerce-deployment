@@ -1,5 +1,5 @@
 import './home.css';
-import React, {Fragment, useState} from "react";
+import React, {Fragment } from "react";
 import Header from '../../components/header/Header';
 import ProductList from "../../components/productList/ProductList";
 import Searchbar from "../../components/searchbar/Searchbar";

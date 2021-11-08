@@ -1,5 +1,5 @@
 import './Header.css';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment } from 'react';
 import {Link, NavLink} from "react-router-dom";
 
 const Header = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
