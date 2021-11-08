@@ -5,7 +5,7 @@ const ProductOverview = (productDetails) => {
     const id = productDetails.productdetails.product_id;
     const name = productDetails.productdetails.product_name;
     const price = productDetails.productdetails.product_price;
-    const token = localStorage.getItem("token") || null;
+    let token = localStorage.getItem("token");
     //const imageURL = productDetails.productdetails.imageURL;
     //"https://i.imgur.com/1NQuWpK.jpeg"
     //`/productImages/${id}/${id}_1.jpg`   frontend image address
@@ -23,6 +23,9 @@ const ProductOverview = (productDetails) => {
                 "productid": id,
                 "quantity":1,
                 "cart": cart
+            }
+            if(token === null){
+                token = "no_token";
             }
 
             const response = await fetch("http://localhost:5000/cart", {

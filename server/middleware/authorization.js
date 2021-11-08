@@ -6,13 +6,10 @@ module.exports = async (req, res, next) => {
         //destructure token from request header
         //const jwtToken = req.cookies.token;
         const jwtToken = req.headers.token;
-        const token = req.headers.token;
         // set user login status for cart path
-        console.log(req.originalUrl);
         if(req.originalUrl === "/cart"){
             console.log(jwtToken);
-            if(jwt.JsonWebTokenError){
-                console.log('check1');
+            if(jwtToken === 'no_token' || !jwtToken){
                 req.loggedIn = false;
                 return next();
             }
