@@ -23,19 +23,21 @@ router.post("/", authorization, async (req, res) => {
     try {
         //destructure request body
         const loggedIn = req.loggedIn;
-        const { productid, quantity, cart } = req.body;
+        const { productid, quantity, cart, productname, price } = req.body;
         console.log(loggedIn);
         if(loggedIn === false){
             //create object for new cart item
             const cartItem = {
-                product: productid,
-                quantity: quantity
+                product_id: productid,
+                quantity: quantity,
+                product_name: productname, 
+                product_price: price
             }
             //check if new item is already in cart
             let productExists = false;
             cart.forEach(element => {
                 //if item is already in cart then update quantity
-                if(element.product === productid){
+                if(element.product_id === productid){
                     element.quantity = element.quantity + quantity;
                     productExists = true;
                     res.status(200).json(cart);
@@ -52,7 +54,7 @@ router.post("/", authorization, async (req, res) => {
             //if item already in cart the update quantity
             if(cartItems.rows.length >= 1){
                 await pool.query("UPDATE cart SET quantity = quantity + $1 WHERE user_id = $2 AND product_id = $3 RETURNING product_id, quantity", [quantity, req.user, productid]);
-                const updatedcart = await pool.query("SELECT cart.product_id, quantity, product_name, product_price, product_description FROM cart JOIN products ON cart.product_id = products.product_id WHERE user_id = $1", [req.user]);
+                const updatedcart = await pool.query("SELECT cart.product_id, quantity, product_name, product_price FROM cart JOIN products ON cart.product_id = products.product_id WHERE user_id = $1", [req.user]);
                 //const updatedcart = await pool.query("SELECT product_id, quantity FROM cart WHERE user_id = $1", [req.user]);
                 return res.status(200).json(updatedcart.rows);
             }

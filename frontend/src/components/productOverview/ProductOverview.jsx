@@ -21,6 +21,8 @@ const ProductOverview = (productDetails) => {
         try {
             const body = {
                 "productid": id,
+                "productname" : name,
+                "price" : price,
                 "quantity":1,
                 "cart": cart
             }

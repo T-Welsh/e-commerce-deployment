@@ -11,6 +11,7 @@ module.exports = async (req, res, next) => {
             console.log(jwtToken);
             if(jwtToken === 'no_token' || !jwtToken){
                 req.loggedIn = false;
+                console.log('check1');
                 return next();
             }
         }

@@ -46,6 +46,9 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
     const handleClearCart = async (e) => {
         e.preventDefault();
         let token = await localStorage.getItem("token");
+        if(token === null){
+            token = "no_token";
+        }
         try {
             const response = await fetch("http://localhost:5000/cart", {
                         method: "DELETE",
