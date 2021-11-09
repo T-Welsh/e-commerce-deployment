@@ -6,6 +6,7 @@ import Register from './routes/resgister';
 import { Fragment, useState, useEffect } from 'react';
 import Home from './routes/home/home';
 import Product from './routes/product/product';
+import Cart from './routes/cart/cart';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -53,7 +54,7 @@ function App() {
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/home" />} />
 
-            <Route exact path="/home" render={props => (<Home {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} searchTerm={searchTerm} setSearchTerm={setSearchTerm}department={department} setDepartment={setDepartment}/>) } ></Route>
+            <Route exact path="/home" render={props => (<Home {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} searchTerm={searchTerm} setSearchTerm={setSearchTerm}department={department} setDepartment={setDepartment}/>) } />
 
             <Route exact path="/login" render={props => !isAuthenticated ? (<Login {...props} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>) : (<Redirect to="/Home" />)} />
 
@@ -62,6 +63,8 @@ function App() {
             <Route exact path="/dashboard" render={props => isAuthenticated ? (<Dashboard {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>) : (<Redirect to="/login" />)}/>
 
             <Route exact path={`/product:id`} render={props => (<Product {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} department={department}/>)}/>
+
+            <Route exact path={'/cart'} render={props => (<Cart {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>)}/>
 
           </Switch>
         </div>

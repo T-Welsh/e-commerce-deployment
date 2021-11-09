@@ -1,17 +1,17 @@
 const router = require('express').Router();
 require('dotenv').config();
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const pool = require('../db');
 const authcheck = require('../middleware/authcheck');
 const authorization = require("../middleware/authorization");
-const { v4: uuidv4} = require('uuid'); 
+
 
 const YOUR_DOMAIN = `http://localhost:${process.env.PORT}`;
 
 //get cart items
-router.get("/", (req, res) => {
+router.get("/", authorization, async (req, res) => {
     try {
-        res.send(req.originalUrl);
+        const cartItems = await pool.query("SELECT cart.product_id, quantity, product_name, product_price, product_description FROM cart JOIN products ON cart.product_id = products.product_id WHERE user_id = $1", [req.user]);
+        res.json(cartItems.rows);
     } catch (err) {
         console.error(err.message);
         res.status(500).json("Server Error");  
@@ -52,7 +52,8 @@ router.post("/", authorization, async (req, res) => {
             //if item already in cart the update quantity
             if(cartItems.rows.length >= 1){
                 await pool.query("UPDATE cart SET quantity = quantity + $1 WHERE user_id = $2 AND product_id = $3 RETURNING product_id, quantity", [quantity, req.user, productid]);
-                const updatedcart = await pool.query("SELECT product_id, quantity FROM cart WHERE user_id = $1", [req.user]);
+                const updatedcart = await pool.query("SELECT cart.product_id, quantity, product_name, product_price, product_description FROM cart JOIN products ON cart.product_id = products.product_id WHERE user_id = $1", [req.user]);
+                //const updatedcart = await pool.query("SELECT product_id, quantity FROM cart WHERE user_id = $1", [req.user]);
                 return res.status(200).json(updatedcart.rows);
             }
             // if item not already in the cart then add item to cart
@@ -92,7 +93,8 @@ router.put("/", authorization, async (req, res) => {
                 //delete product from cart 
                 await pool.query("DELETE FROM cart WHERE user_id = $1 AND product_id = $2", [req.user, productid,])
             }
-            const updatedcart = await pool.query("SELECT product_id, quantity FROM cart WHERE user_id = $1", [req.user]);
+            const updatedcart = await pool.query("SELECT cart.product_id, quantity, product_name, product_price, product_description FROM cart JOIN products ON cart.product_id = products.product_id WHERE user_id = $1", [req.user]);
+            //const updatedcart = await pool.query("SELECT product_id, quantity FROM cart WHERE user_id = $1", [req.user]);
                 return res.status(200).json(updatedcart.rows);
         }
     } catch (err) {
@@ -103,14 +105,14 @@ router.put("/", authorization, async (req, res) => {
 
 //clear cart
 router.delete("/", authorization, async(req, res) => {
+    const cart = [];
     try {
         const loggedIn = req.loggedIn;
         if(loggedIn === false){
-            const cart = [];
             res.status(200).json(cart);
         }else{
             await pool.query("DELETE FROM cart WHERE user_id = $1", [req.user]);
-            res.status(200).send("Cart Cleared");
+            res.status(200).json(cart);
         }
     } catch (err) {
         console.error(err.message);

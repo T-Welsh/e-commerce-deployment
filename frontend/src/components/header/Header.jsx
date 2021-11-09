@@ -26,6 +26,7 @@ const Header = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
                     <li><Link to="/home" onClick={()=>{handleShopReset()}}>Shop</Link></li>
                     <li>{isAuthenticated ? <Link to="/login" onClick={ e => logout(e)}>Logout</Link> : <Link to="/login">Login or Register</Link>}</li>
                     <li><Link to="/dashboard">Dashboard</Link></li>
+                    <li><Link to="/cart">Cart</Link></li>
                 </ul>
                 
             </div>
