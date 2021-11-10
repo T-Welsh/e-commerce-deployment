@@ -16,6 +16,8 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
         ]
     );
 
+    let token = localStorage.getItem("token");
+
     useEffect(() => {
         const getCart = async() => {
             if(isAuthenticated){
@@ -67,6 +69,33 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
         }
     }
 
+    const handleCheckout = async (e) => {
+        e.preventDefault();
+        console.log(token);
+        if(token === null){
+            token = "no_token";
+        }
+        console.log(token);
+        try {
+            const response = await fetch("http://localhost:5000/checkout", {
+                        method: "POST",
+                        headers: {
+                        //"Access-Control-Allow-Origin": "http://localhost:3000",
+                        "content-type" : "text/html",
+                        "token": token
+                        },
+                        mode: 'cors',
+                    });
+                    //console.log(response);
+                    const parseRes = await response.json();
+                    console.log(parseRes);
+                    window.location.href = parseRes;
+                    //localStorage.setItem("cart", JSON.stringify(parseRes));
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+
 
 console.log(cart);
     return(
@@ -84,11 +113,10 @@ console.log(cart);
                             })
                         }
                         <button onClick={(e) => {handleClearCart(e)}}>Clear Cart</button>
-                    </div>
-                    
+                    </div> 
                 )
             }
-
+            <button onClick={(e) => {handleCheckout(e)}}>Checkout</button>
         </Fragment>
     )
 

@@ -32,7 +32,7 @@ router.post("/", authcheck, authorization, stockcheck, async (req, res) => {
             //get product image for cart
             imageURL = `${YOUR_DOMAIN}/productImages/${productId}/${productId}_1.jpg`
             //create lineitem
-            console.log(productId);
+            //console.log(productId);
             lineItems.push(
                 {
                     price_data: {
@@ -52,7 +52,7 @@ router.post("/", authcheck, authorization, stockcheck, async (req, res) => {
                 },
             );
         }
-        console.log(lineItems);
+        //console.log(lineItems);
         //handle payment
         const session = await stripe.checkout.sessions.create({
             line_items: lineItems,
@@ -69,8 +69,10 @@ router.post("/", authcheck, authorization, stockcheck, async (req, res) => {
             cancel_url: `${YOUR_DOMAIN}/checkout/cancel`,
             //idempotencyKey: idempotencyKey
         });
-
-        res.redirect(303, session.url);
+        console.log('check1');
+        //res.redirect(303, session.url);
+        res.json(session.url)
+        console.log('check2');
 
     } catch (err) {
         console.error(err.message);

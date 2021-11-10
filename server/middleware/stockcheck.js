@@ -4,7 +4,7 @@ module.exports = async (req, res, next) => {
     //retrive cart items from db
     const orderItems = await pool.query("SELECT * FROM cart WHERE user_id = $1", [req.user]);
     if(orderItems.rowCount <= 0){
-        return res.status(406).send("no items in cart");
+        return res.status(406).json("no items in cart");
     }
     //check item are in stock
     for (i=0; i<orderItems.rowCount; i++){

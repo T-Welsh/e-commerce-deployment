@@ -8,15 +8,13 @@ module.exports = async (req, res, next) => {
         const jwtToken = req.headers.token;
         // set user login status for cart path
         if(req.originalUrl === "/cart"){
-            console.log(jwtToken);
-            if(jwtToken === 'no_token' || !jwtToken){
+            if(jwtToken === 'no_token'){
                 req.loggedIn = false;
-                console.log('check1');
                 return next();
             }
         }
          //check token exists
-        if(!jwtToken){
+        if(jwtToken === 'no_token'){
             return res.status(403).json("Not Authorized")
         }
         //check token is valid

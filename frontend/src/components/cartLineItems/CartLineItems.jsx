@@ -76,7 +76,6 @@ const CartLineItem = ({product, setCart}) => {
             <div style={{display: 'flex'}}>
                 <img src={`http://localhost:5000/productImages/${product.product_id}/${product.product_id}_1.jpg`} alt={product.product_name} style={{maxWidth: "60px", maxHeight: "60px"}}/>
                 <p>{product.product_name}</p>
-                <p>{product.quantity}</p>
                 <p>{product.product_price}</p>
                 <input type="number" id="quantity name="quantity min="1" value={product.quantity} onChange={(e) => {handleChange(e)}}/>
                 <button onClick={(e) => {handleRemoveItem(e)}}>Remove Item</button>
