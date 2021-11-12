@@ -7,6 +7,8 @@ import { Fragment, useState, useEffect } from 'react';
 import Home from './routes/home/home';
 import Product from './routes/product/product';
 import Cart from './routes/cart/cart';
+import Orders from './routes/orders/orders';
+import OrderDetail from './routes/orderDetail/orderDetail';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -65,6 +67,10 @@ function App() {
             <Route exact path={`/product:id`} render={props => (<Product {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} department={department}/>)}/>
 
             <Route exact path={'/cart'} render={props => (<Cart {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>)}/>
+
+            <Route exact path={"/orders"} render={props => isAuthenticated ? (<Orders {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>) : (<Redirect to="/login" />)}/>
+
+            <Route exact path={"/orders:id"} render={props => (<OrderDetail {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} searchTerm={searchTerm} setSearchTerm={setSearchTerm}department={department} setDepartment={setDepartment}/>) }/>
 
           </Switch>
         </div>

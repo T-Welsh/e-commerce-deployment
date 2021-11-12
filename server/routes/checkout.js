@@ -31,6 +31,7 @@ router.post("/", authcheck, authorization, stockcheck, async (req, res) => {
             await pool.query("INSERT INTO orders (product_id, order_quantity, invoice_id, unit_price) VALUES ($1, $2, $3, $4)", [productId, quantity, invoiceId, price]);
             //get product image for cart
             imageURL = `${YOUR_DOMAIN}/productImages/${productId}/${productId}_1.jpg`
+            //imageURL = 'https://i.imgur.com/1NQuWpK.jpeg';
             //create lineitem
             //console.log(productId);
             lineItems.push(
@@ -52,12 +53,13 @@ router.post("/", authcheck, authorization, stockcheck, async (req, res) => {
                 },
             );
         }
-        //console.log(lineItems);
+        //console.log(lineItems[0].price_data.product_data);
         //handle payment
         const session = await stripe.checkout.sessions.create({
             line_items: lineItems,
             metadata: {
                 invoice_number: invoice.rows[0].invoice_id,
+                customer: req.user,
             },
             payment_method_types : ['card'],
             mode: 'payment',
@@ -68,11 +70,9 @@ router.post("/", authcheck, authorization, stockcheck, async (req, res) => {
             success_url: `${YOUR_DOMAIN}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${YOUR_DOMAIN}/checkout/cancel`,
             //idempotencyKey: idempotencyKey
-        });
-        console.log('check1');
+        });;
         //res.redirect(303, session.url);
         res.json(session.url)
-        console.log('check2');
 
     } catch (err) {
         console.error(err.message);
@@ -85,12 +85,40 @@ router.get('/success', async (req, res) => {
         const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
         const customer = await stripe.customers.retrieve(session.customer);
         console.log(session.metadata);
-        res.json(session)
-        //res.send(`<html><body><h1>Thanks for your order, ${customer.name}!</h1></body></html>`);
+        console.log(session.shipping);
+        const invoiceId = session.metadata.invoice_number;
+        const addressee = session.shipping.name;
+        console.log(addressee);
+        const add1 = session.shipping.address.line1;
+        const add2 = session.shipping.address.line2;
+        const add3 = session.shipping.address.city;
+        const county = session.shipping.address.state;
+        const postcode = session.shipping.address.postal_code;
+        const total = session.amount_total/100;
+        const transactionId = session.payment_intent;
+
+        //Update invoice in db with address details, update total, mark invoice as paid, and return invoice
+        try {
+            const invoice = await pool.query("UPDATE invoices SET addressee = $1, delivery_address_1 = $2, delivery_address_2 = $3, delivery_address_3 = $4, delivery_county = $5, delivery_post_code = $6, invoice_total = $7, invoice_paid = true, transaction_id = $8 WHERE invoice_id = $9 RETURNING *", [addressee, add1, add2, add3, county, postcode, total, transactionId, invoiceId]);
+            //clear cart
+            await pool.query("DELETE FROM cart WHERE user_id = $1", [session.metadata.customer]);
+            //res.json(session)
+            //res.redirect('http://localhost:3000');
+            res.redirect(`http://localhost:3000/orders${invoiceId}`);
+            //res.redirect('http://localhost:3000/dashboard');
+            //res.send(`<html><body><h1>Thanks for your order, ${customer.name}!</h1></body></html>`);
+        } catch (err) {
+            console.error(err.message)
+            res.status(500).json("Server Error");
+        }
     } catch (err) {
         console.error(err.message);
         res.status(500).send('there was an error')
     }
+});
+
+router.get('/cancelled', async (req, res) => {
+    
 });
 
 module.exports = router;
