@@ -72,6 +72,10 @@ function App() {
 
             <Route exact path={"/orders:id"} render={props => (<OrderDetail {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} searchTerm={searchTerm} setSearchTerm={setSearchTerm}department={department} setDepartment={setDepartment}/>) }/>
 
+            <Route exact path="/home" render={props => (<Home {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} searchTerm={searchTerm} setSearchTerm={setSearchTerm}department={department} setDepartment={setDepartment}/>) } />
+
+            <Route exact path="/cancelled" render={() => <Redirect to="/cart" />} />
+
           </Switch>
         </div>
       </Router>

@@ -2,7 +2,7 @@ import React, {Fragment} from "react";
 import PasswordUpdate from "../components/passwordUpdate/PasswordUpdate";
 import UserInfo from "../components/userInfo/UserInfo";
 import Header from "../components/header/Header";
-import {Link, NavLink} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Dashboard = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
 

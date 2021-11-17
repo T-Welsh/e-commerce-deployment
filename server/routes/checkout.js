@@ -68,7 +68,7 @@ router.post("/", authcheck, authorization, stockcheck, async (req, res) => {
             },
             billing_address_collection: "required",
             success_url: `${YOUR_DOMAIN}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${YOUR_DOMAIN}/checkout/cancel`,
+            cancel_url: `${YOUR_DOMAIN}/checkout/cancelled?session_id={CHECKOUT_SESSION_ID}`,
             //idempotencyKey: idempotencyKey
         });;
         //res.redirect(303, session.url);
@@ -113,12 +113,21 @@ router.get('/success', async (req, res) => {
         }
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('there was an error')
+        res.status(500).send("Server Error");
     }
 });
 
 router.get('/cancelled', async (req, res) => {
-    
+    try {
+        const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
+        const invoiceId = session.metadata.invoice_number;
+        await pool.query("Delete FROM orders WHERE invoice_id = $1", [invoiceId]);
+        await pool.query("Delete FROM invoices WHERE invoice_id = $1", [invoiceId]);
+        res.redirect(`http://localhost:3000/cancelled`);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
 });
 
 module.exports = router;
