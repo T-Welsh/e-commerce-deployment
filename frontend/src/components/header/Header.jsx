@@ -1,8 +1,12 @@
 import './Header.css';
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {Link, NavLink} from "react-router-dom";
+import BurgerMenu from "../burgerMenu/burgerMenu";
+
 
 const Header = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     const logout = (e) => {
         //prevent page refresh
@@ -16,37 +20,35 @@ const Header = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
         setDepartment('');
     }
 
+    const handleresize = () => {
+        setWindowWidth(window.innerWidth);
+    }
 
-/*
-    return(
-        <Fragment>
-            <div id='header'>
-                <NavLink to='/home' onClick={() => {handleShopReset()}}><h1 id='companyName' >The Suffolk Company</h1></NavLink>
-                <nav className="navMenu">
-                <ul className="navList">
-                    <Link to="/home" onClick={()=>{handleShopReset()}}><li className="navLink">Shop</li></Link>
-                    {isAuthenticated ? <Link to="/login" onClick={ e => logout(e)}><li className="navLink">Logout</li></Link> : <Link to="/login"><li className="navLink">Login or Register</li></Link>}
-                    <Link to="/dashboard"><li className="navLink">Dashboard</li></Link>
-                    <Link to="/cart"><li className="navLink">Cart</li></Link>
-                </ul>
-                </nav>
-                
-            </div>
-        </Fragment>
-    )
-*/
+    useEffect(() => {
+        window.onresize = handleresize;
+    }, [])
 
-    return(
-        <Fragment>
-            <div id='header'>
-                <NavLink to='/home' onClick={() => {handleShopReset()}}><h1 id='companyName' >The Suffolk Company</h1></NavLink>
-                <nav className="navMenu">
+
+    const renderMenu = (windowWidth) => {
+        if (windowWidth <= 770){
+            return (<BurgerMenu isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>)
+        }
+        else return (
+            <nav className="navMenu">
                     <Link to="/home" className="navLink" onClick={()=>{handleShopReset()}}>Shop</Link>
                     {isAuthenticated ? <Link to="/login" className="navLink" onClick={ e => logout(e)}>Logout</Link> : <Link to="/login" className="navLink">Login or Register</Link>}
                     <Link to="/dashboard" className="navLink">Dashboard</Link>
-                    <Link to="/cart" className="navLink">Cart</Link>
-                </nav>
-            </div>
+                    <Link to="/cart" className="navLink"><i class="bi bi-cart3"></i> Cart</Link>
+            </nav>
+        )
+    }
+
+    return(
+        <Fragment>
+            <header id='header'>
+                <NavLink to='/home' onClick={() => {handleShopReset()}}><h1 id='companyName' >The Suffolk Company</h1></NavLink>
+                {renderMenu(windowWidth)}
+            </header>
         </Fragment>
     )
 }

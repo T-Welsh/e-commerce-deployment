@@ -1,5 +1,5 @@
 #header{
-    background-color: #778899;
+    background-color: var(--lightGrey);
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -11,35 +11,42 @@
     font-family: 'Merriweather', serif;
     font-weight: 400;
     font-size: 2rem;
-    width: 100vw;
-    text-align: center;
+    width: fit-content;
+    margin-left: 1.5rem;
     margin-top: .3rem;
-    margin-bottom: .5rem;
+}
+
+.navMenu {
+    width: 100vw;
+        margin-right: 1rem;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        /*justify-content: space-evenly;
+        align-items: center;*/
+    
+    
+}
+
+.navLink {
+    padding: .3rem .5rem;
+    border-right: 1px solid var(--white);
+   
 }
 
 .navLink:hover {
-    background-color: #708090;
+    background-color: var(--grey);
 }
 
 @media only screen and (max-width: 400px) {
-  
-    .navMenu {
+
+    #companyName {
         width: 100vw;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-            /*justify-content: space-evenly;
-            align-items: center;*/
-        
-        
+        text-align: center;
+        margin-left: 0;
+        margin-top: .3rem;
+        margin-bottom: .5rem;
     }
-
-    .navLink {
-        padding-right: .5rem;
-        padding-left: .5rem;
-        border-right: 1px solid #f5f5f5;
-       
-    }
-
+  
 }
