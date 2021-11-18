@@ -52,7 +52,7 @@ function App() {
   return (
     <Fragment>
       <Router>
-        <div className="container">
+        <div className="appContainer">
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/home" />} />
 

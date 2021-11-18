@@ -1,4 +1,4 @@
-
+/*
 .sidebar{
     position: fixed;
     width: 15%;
@@ -11,7 +11,6 @@
     margin: 0 15%;
     text-align: right;
     top: 25%;
-    /*transform: translateY(-50%);*/
     display: flex;
         flex-direction: column;
 }
@@ -28,4 +27,4 @@
     padding: 0;
     margin: 0;
 }
-
+*/
