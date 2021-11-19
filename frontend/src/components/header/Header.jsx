@@ -30,7 +30,7 @@ const Header = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
 
 
     const renderMenu = (windowWidth) => {
-        if (windowWidth <= 767){
+        if (windowWidth < 767){
             return (
                 <nav className="burgerNav" aria-label="Menu">
                     <BurgerMenu isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
