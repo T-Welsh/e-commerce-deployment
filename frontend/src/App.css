@@ -2,11 +2,13 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css");
 
 :root {
-  --lightGrey: #778899;
-  --grey: #708090;
+  --lightSlate: #778899;
+  --slate: #708090;
   --white: #f5f5f5;
   --suede: #c5bbb1;
+  --darkSlate: #2f4f4f;
   background-color: var(--suede);
+
 }
 
 * {
@@ -16,7 +18,10 @@
   color: var(--white);
   font-family: 'Merriweather Sans', sans-serif;
   text-decoration: none;
-  
+}
+
+.contentBody {
+  padding-top: 180px;
 }
 /*
 .viewContainer {

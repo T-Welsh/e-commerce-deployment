@@ -2,7 +2,7 @@
     position: absolute;
     left: 0rem;
     width: 100vw;
-    background-color: var(--lightGrey);
+    background-color: var(--lightSlate);
     display: flex;
         justify-content: space-between;
         align-items: baseline;
@@ -28,6 +28,7 @@
     position:fixed;
     top: 33%;
     left: 0rem;
+    z-index: 100;
     width: 4.8rem;
     height: 55.594px;
     padding: 1rem 0rem;
@@ -69,7 +70,7 @@
     }
     
     .navLink:hover {
-        background-color: var(--grey);
+        background-color: var(--slate);
     }
   
 }

@@ -1,30 +1,107 @@
-/*
-.sidebar{
-    position: fixed;
-    width: 15%;
-    height: 100vh;
-    min-width: 15rem;
+
+.sidebar {
+    position: absolute;
+        top: 97.92px;
+        left: 0;
+    width: 100vw;
+    display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+    border-bottom: 0.12rem solid var(--suede);
+    background-color: var(--white);
+    
 }
 
-.nav{
-    position: relative;
-    margin: 0 15%;
-    text-align: right;
-    top: 25%;
+#productSearch {
+    padding: .32rem;
+    /*padding: .32rem 1rem;*/
+    /*background-color: violet;*/
+}
+
+#search:valid {
+    color: var(--lightSlate) !important;
+    border: 0.7px solid var(--slate);
+    border-right: 0;
+    height: 24px;
+    border-radius: 0;
+    /*transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;*/
+
+}
+
+#search:focus {
+    color: var(--slate) !important;
+    outline: none;
+    border-color: var(--darkSlate);
+    box-shadow: 0 0 3px var(--slate);
+    transition: border-color .2s ease-in-out,box-shadow .2s ease-in-out;
+}
+
+#search::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    height: 24px;
+    width: 24px;
+    margin-left: .4em;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23777'><path d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/></svg>");
+    cursor: pointer;
+    color: var(--slate) !important;
+}
+
+.searchButton {
+    color: var(--slate);
+    border: 0.7px solid var(--slate);
+    height: 24px;
+    padding: 1px 6px;
+    border-radius: 0;
+}
+
+#departmentCollapsed {
+    color: var(--slate);
+    font-size: 1rem;
+    background-color: transparent;
+    border: 0;
+    margin-top: 0.6rem;
+    /*margin-bottom: .2rem;*/
+    display: flex;
+        align-items: center;
+}
+
+#departmentCollapsed i {
+    color: var(--slate);
+    font-size: 2rem;
+}
+
+#departmentList {
+    list-style-type: none;
     display: flex;
         flex-direction: column;
+    margin-top: 0.6rem;
+    /*margin-left: 1rem;*/
 }
 
-.nav ul{
-    
-    list-style: none;
+#departmentList::marker {
+    text-align: justify !important;
+
+}
+
+.departmentSelector {
+    color: var(--slate);
+    background-color: transparent;
+    border: 0;
+    margin-bottom: .6rem;
+    width: 100vw;
     display: flex;
-    flex-direction: column;
-    align-items: baseline;
+    padding-left: 35%;
 }
 
-.nav li{
-    padding: 0;
-    margin: 0;
+.departmentSelector::before {
+    color: var(--slate);
+    /*content: '\2732';*/
+    padding-right: 1rem;
+    padding-left: 1rem;
 }
-*/
+
+.departmentSelector:hover {
+    color: var(--white);
+    background-color: var(--slate);
+}
+

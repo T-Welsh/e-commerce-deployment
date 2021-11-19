@@ -1,18 +1,14 @@
 .burgerContainer {
-    /*position:fixed;*/
     position: relative;
-    background-color: var(--lightGrey);
+    background-color: var(--lightSlate);
     width: fit-content;
     height: fit-content;
     border: solid 1px var(--white);
     border-radius: 100%;
-    /*top: 33%;
-    left: .4rem*/
-    /*right: 3rem;*/
 }
 
 .burgerContainer:hover {
-    background-color: var(--grey);
+    background-color: var(--slate);
 }
 
 /* Position and sizing of burger button */
@@ -59,7 +55,7 @@
   
   /* General sidebar styles */
   .bm-menu {
-    background: var(--grey);
+    background: var(--slate);
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
     overflow: hidden !important;
