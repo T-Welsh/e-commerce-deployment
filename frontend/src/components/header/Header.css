@@ -1,52 +1,76 @@
 #header{
+    position: absolute;
+    left: 0rem;
+    width: 100vw;
     background-color: var(--lightGrey);
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    flex-direction: row;
+        justify-content: space-between;
+        align-items: baseline;
+        flex-wrap: wrap;
+        flex-direction: row;
+    /*padding-left: 1rem;
+    padding-right: 1rem;*/
+    border-bottom: .32rem solid var(--suede);
 }
 
 #companyName {
     font-family: 'Merriweather', serif;
     font-weight: 400;
     font-size: 2rem;
-    width: fit-content;
-    margin-left: 1.5rem;
-    margin-top: .3rem;
-}
-
-.navMenu {
     width: 100vw;
-        margin-right: 1rem;
-        display: flex;
+    margin-left: 0;
+    margin-top: .3rem;
+    margin-bottom: .5rem;
+    text-align: center;
+}
+
+.burgerNav {
+    position:fixed;
+    top: 33%;
+    left: 0rem;
+    width: 4.8rem;
+    height: 55.594px;
+    padding: 1rem 0rem;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    background-color: var(--suede);
+    display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        /*justify-content: space-evenly;
-        align-items: center;*/
-    
-    
+        justify-content: center;
 }
 
-.navLink {
-    padding: .3rem .5rem;
-    border-right: 1px solid var(--white);
-   
-}
 
-.navLink:hover {
-    background-color: var(--grey);
-}
+@media only screen and (min-width: 767px) {
 
-@media only screen and (max-width: 400px) {
+    #header{
+        position: relative;
+        padding-left: 0rem;
+        padding-right: 0rem;
+    }
 
     #companyName {
-        width: 100vw;
-        text-align: center;
-        margin-left: 0;
+        text-align: left;
+        margin-left: 1.5rem;
         margin-top: .3rem;
-        margin-bottom: .5rem;
+    }
+
+    .navMenu {
+        width: 100vw;
+            margin-right: 1rem;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+    }
+    
+    .navLink {
+        padding: .3rem .5rem;
+        border-right: 1px solid var(--white);
+    }
+    
+    .navLink:hover {
+        background-color: var(--grey);
     }
   
 }
+

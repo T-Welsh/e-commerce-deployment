@@ -11,16 +11,16 @@ const Home = ({isAuthenticated, setAuth, searchTerm, setSearchTerm, department, 
 
     return (
         <Fragment>
-        <div id='homeContainer'>
-            <Header isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
-            <Searchbar setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
-            <div className="contentBody">
-                <h2>{department === '' ? "All Departments": (`${department} ${searchTerm === '' ? searchTerm : `> ${searchTerm}`}`)}</h2>
-                <div id='productListContainer'>
-                    <ProductList searchTerm={searchTerm} department={department}/>
+            <div className="contentContainer" id='homeContainer'>
+                <Header isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
+                <Searchbar setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
+                <div className="contentBody">
+                    <h2>{department === '' ? "All Departments": (`${department} ${searchTerm === '' ? searchTerm : `> ${searchTerm}`}`)}</h2>
+                    <div id='productListContainer'>
+                        <ProductList searchTerm={searchTerm} department={department}/>
+                    </div>
                 </div>
             </div>
-        </div>
         </Fragment>
     );
 }; 

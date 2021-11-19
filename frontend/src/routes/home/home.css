@@ -1,8 +1,9 @@
-/*
-#homecontainer{
-    display: flex
-}
 
+#homecontainer{
+    background-color: white;
+    border-radius: 10%;
+}
+/*
 .contentBody{
     position: relative;
     width: 85%;

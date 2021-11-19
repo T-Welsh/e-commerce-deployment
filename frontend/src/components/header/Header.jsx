@@ -30,14 +30,18 @@ const Header = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
 
 
     const renderMenu = (windowWidth) => {
-        if (windowWidth <= 770){
-            return (<BurgerMenu isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>)
+        if (windowWidth <= 767){
+            return (
+                <nav className="burgerNav" >
+                    <BurgerMenu isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
+                </nav>
+            )
         }
         else return (
             <nav className="navMenu">
                     <Link to="/home" className="navLink" onClick={()=>{handleShopReset()}}>Shop</Link>
                     {isAuthenticated ? <Link to="/login" className="navLink" onClick={ e => logout(e)}>Logout</Link> : <Link to="/login" className="navLink">Login or Register</Link>}
-                    <Link to="/dashboard" className="navLink">Dashboard</Link>
+                    <Link to="/dashboard" className="navLink">Account</Link>
                     <Link to="/cart" className="navLink"><i class="bi bi-cart3"></i> Cart</Link>
             </nav>
         )
