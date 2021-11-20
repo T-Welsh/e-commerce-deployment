@@ -15,7 +15,7 @@ const Home = ({isAuthenticated, setAuth, searchTerm, setSearchTerm, department, 
                 <Header isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
                 <Searchbar setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
                 <div className="contentBody">
-                    <h2>{department === '' ? "All Departments": (`${department} ${searchTerm === '' ? searchTerm : `> ${searchTerm}`}`)}</h2>
+                    <h2 className="subHeadings">Viewing {department === '' ? "All Departments": (`${department} ${searchTerm === '' ? searchTerm : `> ${searchTerm}`}`)}</h2>
                     <div id='productListContainer'>
                         <ProductList searchTerm={searchTerm} department={department}/>
                     </div>

@@ -1,14 +1,12 @@
 .productContainer{
-    width: 25rem;
-    min-width: 25rem;
-    background-color: lightgrey;
-    margin: 1rem;
+    min-width: 210px;
+    max-width: 300px;
+    background-color: rgba(211, 211, 211, 0.645);
+    /*background-color:var(--);*/
     display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-content: space-around;
-        justify-content: space-between;
+        flex-direction: column;
+        align-content: center;
         align-items: center;
-
-            
+    border-bottom: 1px solid var(--suede);
+    border-radius: 1rem;        
 }

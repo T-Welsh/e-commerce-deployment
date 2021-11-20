@@ -8,6 +8,8 @@
   --suede: #c5bbb1;
   --darkSlate: #2f4f4f;
   background-color: var(--suede);
+  --headings-font-family: 'Merriweather', serif;
+  --page-text-font-family: 'Merriweather Sans', sans-serif;
 
 }
 
@@ -16,20 +18,17 @@
   padding: 0;
   font-size: 16px;
   color: var(--white);
-  font-family: 'Merriweather Sans', sans-serif;
+  font-family: var(--page-text-font-family);
   text-decoration: none;
 }
 
 .contentBody {
-  padding-top: 180px;
+  margin-top: 183.68px;
+  display: flex;
+      flex-direction: column;
+      align-items: center;
 }
-/*
-.viewContainer {
-  max-width: 100vw;
-  padding: 0rem 0rem 0rem 4.8rem;
-  /*background-color: white;
-}
-*/
+
 .contentContainer {
   background-color: var(--white);
   border-radius: 0rem;
@@ -37,15 +36,74 @@
   border-bottom-right-radius: 3rem;
   overflow: hidden;
   padding-left: 4.8rem;
+  padding-bottom: 2rem;
+}
+
+.subHeadings {
+  color: var(--slate);
+  font-family: var(--page-text-font-family);
+  font-weight: 400;
+  padding-top: .6rem;
+  padding-left: 1rem;
+  width: 212px;
+}
+
+@media only screen and (min-width: 336px) {
+
+  .contentBody {
+      margin-top: 143.68px;
+  }
+
+  .subHeadings {
+    font-size: 1.1rem;
+    width: 228px;
+  }
+}
+
+@media only screen and (min-width: 414px) {
+
+  .subHeadings {
+    font-size: 1.3rem;
+    width: 300px;
+  }
 }
 
 @media only screen and (min-width: 767px) {
 
-  .viewContainer {
-
+  .contentBody {
+    margin-top: 51.52px;
   }
-  
+
   .contentContainer {
     padding-left: 0;
+    
+  }
+
+  .subHeadings {
+    width: 648px;
+    font-size: 1.4rem;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+
+  .subHeadings {
+    padding-top: 1rem;
+    width: 932px;
+  }
+}
+
+@media only screen and (min-width: 1350px) {
+
+  .subHeadings {
+    padding-top: 2rem;
+    width: 1280px;
+  }
+}
+
+@media only screen and (min-width: 1650px) {
+
+  .subHeadings {
+    width: 1596px;
   }
 }

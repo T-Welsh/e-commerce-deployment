@@ -1,3 +1,4 @@
+import './ProductOverview.css';
 import React, { Fragment } from 'react';
 
 const ProductOverview = (productDetails) => {
@@ -50,10 +51,12 @@ const ProductOverview = (productDetails) => {
 
     return(
         <Fragment>
-                <img src={`http://localhost:5000/productImages/${id}/${id}_1.jpg`} alt={name} style={{maxWidth: "100px", maxHeight: "100px"} }/>
-                <h3>{name}</h3>
-                <p>{price}</p>
-            <button onClick={e => addCart(e)}>Add to Cart</button>
+                <img src={`http://localhost:5000/productImages/${id}/${id}_1.jpg`} alt={name} className="productListImg" />
+                <div className="nameAndPriceContainer">
+                    <h3 className="productListName">{name}. . .</h3>
+                    <p className="productListPrice">{price}</p> 
+                </div>
+            <button className="addCartBtn" onClick={e => addCart(e)}>Add to Basket... <i class="bi bi-bag-check-fill"></i></button>
         </Fragment>
     )
 

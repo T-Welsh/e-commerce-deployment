@@ -14,7 +14,8 @@
 }
 
 #companyName {
-    font-family: 'Merriweather', serif;
+    color: var(--white);
+    font-family: var(--headings-font-family);
     font-weight: 400;
     font-size: 2rem;
     width: 100vw;
