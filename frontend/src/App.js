@@ -64,7 +64,7 @@ function App() {
 
             <Route exact path="/dashboard" render={props => isAuthenticated ? (<Dashboard {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>) : (<Redirect to="/login" />)}/>
 
-            <Route exact path={`/product:id`} render={props => (<Product {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} department={department}/>)}/>
+            <Route exact path={`/product:id`} render={props => (<Product {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} department={department} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>)}/>
 
             <Route exact path={'/cart'} render={props => (<Cart {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>)}/>
 

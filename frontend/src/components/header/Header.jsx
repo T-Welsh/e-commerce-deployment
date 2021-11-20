@@ -42,7 +42,7 @@ const Header = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
                     <Link to="/home" className="navLink" onClick={()=>{handleShopReset()}}>Shop</Link>
                     {isAuthenticated ? <Link to="/login" className="navLink" onClick={ e => logout(e)}>Logout</Link> : <Link to="/login" className="navLink">Login or Register</Link>}
                     <Link to="/dashboard" className="navLink">Account</Link>
-                    <Link to="/cart" className="navLink"><i class="bi bi-cart3"></i> Cart</Link>
+                    <Link to="/cart" className="navLink">{/*<i class="bi bi-cart3"/>*/}<i class="bi bi-bag"></i> Basket</Link>
             </nav>
         )
     }
@@ -50,7 +50,7 @@ const Header = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
     return(
         <Fragment>
             <header id='header'>
-                <NavLink to='/home' onClick={() => {handleShopReset()}}><h1 id='companyName' >The Suffolk Company</h1></NavLink>
+                <NavLink to='/home' onClick={()=>{handleShopReset()}}><h1 id='companyName' >The Suffolk Company</h1></NavLink>
                 {renderMenu(windowWidth)}
             </header>
         </Fragment>

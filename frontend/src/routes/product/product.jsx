@@ -3,7 +3,7 @@ import React, {Fragment, useEffect, useState} from "react";
 import Header from "../../components/header/Header";
 import { NavLink } from "react-router-dom";
 
-const Product = ({isAuthenticated, setAuth, match, department}) => {
+const Product = ({isAuthenticated, setAuth, match, department, setSearchTerm, setDepartment }) => {
     const {params: { id } } = match;
     const [product, setProduct] = useState(
         {
@@ -111,7 +111,7 @@ const Product = ({isAuthenticated, setAuth, match, department}) => {
 console.log(image);
     return (
         <Fragment>
-            <Header isAuthenticated={isAuthenticated} setAuth={setAuth}/>
+            <Header isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
             <h3><NavLink to="/home">{department === '' ? `Back to All Departments`: `Back to ${department}`}</NavLink></h3>
             <h2>{product.productDetails[0].product_name}</h2>
             <p>{product.productDetails[0].product_price}</p>
