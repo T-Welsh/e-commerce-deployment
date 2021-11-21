@@ -38,7 +38,7 @@ const OrderDetail = ({isAuthenticated, setAuth, setSearchTerm, setDepartment, ma
             }
         }
         getOrder();
-    }, [])
+    }, [id])
 
     return (
         <Fragment>
