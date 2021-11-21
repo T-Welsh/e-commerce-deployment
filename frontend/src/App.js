@@ -9,6 +9,9 @@ import Product from './routes/product/product';
 import Cart from './routes/cart/cart';
 import Orders from './routes/orders/orders';
 import OrderDetail from './routes/orderDetail/orderDetail';
+import Terms from "./routes/terms/terms";
+import About from "./routes/about/about";
+import Returns from "./routes/returns/returns";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -76,11 +79,11 @@ function App() {
 
             <Route exact path="/cancelled" render={() => <Redirect to="/cart" />} />
 
-            <Route exact path="/terms" render={props => (<Home {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} searchTerm={searchTerm} setSearchTerm={setSearchTerm}department={department} setDepartment={setDepartment}/>) } />
+            <Route exact path="/terms" render={props => (<Terms {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} searchTerm={searchTerm} setSearchTerm={setSearchTerm}department={department} setDepartment={setDepartment}/>) } />
 
-            <Route exact path="/about" render={props => (<Home {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} searchTerm={searchTerm} setSearchTerm={setSearchTerm}department={department} setDepartment={setDepartment}/>) } />
+            <Route exact path="/about" render={props => (<About {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} searchTerm={searchTerm} setSearchTerm={setSearchTerm}department={department} setDepartment={setDepartment}/>) } />
 
-            <Route exact path="/returns" render={props => (<Home {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} searchTerm={searchTerm} setSearchTerm={setSearchTerm}department={department} setDepartment={setDepartment}/>) } />
+            <Route exact path="/returns" render={props => (<Returns {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} searchTerm={searchTerm} setSearchTerm={setSearchTerm}department={department} setDepartment={setDepartment}/>) } />
 
           </Switch>
         </div>
