@@ -21,6 +21,7 @@ const Home = ({isAuthenticated, setAuth, searchTerm, setSearchTerm, department, 
                     </div>
                 </div>
             </div>
+            <Footer isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}></Footer>
         </Fragment>
     );
 }; 

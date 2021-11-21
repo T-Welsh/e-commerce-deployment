@@ -26,7 +26,7 @@
 }
 
 .burgerNav {
-    position:fixed;
+    position: fixed;
     top: 33%;
     left: 0rem;
     z-index: 100;
