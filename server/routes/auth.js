@@ -5,6 +5,7 @@ const jwtGenerator = require("../utils/jwtGenerator");
 const bcrypt = require("bcrypt");
 const authorization = require("../middleware/authorization");
 const passport = require("passport");
+const { application } = require("express");
 require('dotenv').config();
 
 //register route
@@ -84,12 +85,17 @@ router.get("/google", passport.authenticate('google', {
 }));
 
 //google redirect route
-router.get('/google/redirect', passport.authenticate('google', {session: false/*, failureRedirect: '/auth/'*/}),(req, res) => {
+router.get('/google/redirect', passport.authenticate('google', {session: false/*, failureRedirect: '/auth/'*/}), async (req, res) => {
     try {
         //generate jwt token
         const token = jwtGenerator(req.user.user_id);
         //res.json({ token });
-        res.cookie('token', token, {httpOnly: true, sameSite: 'strict'}).send('cookie set');
+        //res.cookie('token', token, {httpOnly: true, sameSite: 'strict'}).send('cookie set');
+        const stringToken = await token.toString();
+        //console.log(stringtoken);
+
+        res.redirect(`http://localhost:3000/home?user=${stringToken}`);
+
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Server Error");

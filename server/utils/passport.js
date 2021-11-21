@@ -13,7 +13,7 @@ passport.use(
         //options for google strategy
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "/auth/google/redirect"
+        callbackURL: "http://localhost:5000/auth/google/redirect"
     }, async (accessToken, refreshToken, profile, email, done) => {
         try {
             //format user email

@@ -4,10 +4,26 @@ import Header from '../../components/header/Header';
 import ProductList from "../../components/productList/ProductList";
 import Searchbar from "../../components/searchbar/Searchbar";
 import Footer from '../../components/footer/Footer';
+import { useEffect } from 'react';
 
-const Home = ({isAuthenticated, setAuth, searchTerm, setSearchTerm, department, setDepartment }) => {
-    //const [searchTerm, setSearchTerm] = useState('');
-    //const [department, setDepartment] = useState('');
+import {useLocation} from "react-router-dom";
+
+const Home = ({isAuthenticated, setAuth, searchTerm, setSearchTerm, department, setDepartment, verifyAuth}) => {
+
+    const search = useLocation().search;
+    const user = new URLSearchParams(search).get('user');
+
+    //save query params to local storage if user is not authenticated. This is used when user signs in using passportjs as server endpoint redirects to localhost:3000/home
+    const initHome = () => {
+        if(!isAuthenticated){
+            localStorage.setItem("token", user);
+            verifyAuth();
+        }
+    }
+
+    useEffect(()=>{
+        initHome(); 
+    });
 
     return (
         <Fragment>

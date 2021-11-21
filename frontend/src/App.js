@@ -24,33 +24,32 @@ function App() {
   const [department, setDepartment] = useState('');
 
   //retrive JWT token from local storage and send to server for verification
-  useEffect(() => {
+  const verifyAuth = async (/*user*/) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch("http://localhost:5000/auth/is-verify", {
+                  method: "GET",
+                  headers: {
+                    "content-type" : "application/json;charset=UTF-8",
+                    "token" : token,
+                  },
+                  mode: 'cors',
+              });
+
+              const parseRes = await response.json();
+              // set auth state true if server successfully verifies JWT
+              if(parseRes === true){
+                setAuth(true);
+              }
+    } catch (err) {
+      console.error(err.message);
+    }
     
-    const verifyAuth = async () => {
-      try {
-        const token = localStorage.getItem("token");
-
-        const response = await fetch("http://localhost:5000/auth/is-verify", {
-                    method: "GET",
-                    headers: {
-                      "content-type" : "application/json;charset=UTF-8",
-                      "token" : token,
-                    },
-                    mode: 'cors',
-                });
-
-                const parseRes = await response.json();
-                // set auth state true if server successfully verifies JWT
-                if(parseRes === true){
-                  setAuth(true);
-                }
-      } catch (err) {
-        console.error(err.message);
-      }
-      
-    };
+  };
+  useEffect(() => {
     verifyAuth();
-  }, []);
+  });
 
   return (
     <Fragment>
@@ -59,7 +58,7 @@ function App() {
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/home" />} />
 
-            <Route exact path="/home" render={props => (<Home {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} searchTerm={searchTerm} setSearchTerm={setSearchTerm}department={department} setDepartment={setDepartment}/>) } />
+            <Route exact path="/home" render={props => (<Home {...props} isAuthenticated={isAuthenticated} setAuth={setAuth} searchTerm={searchTerm} setSearchTerm={setSearchTerm}department={department} setDepartment={setDepartment} verifyAuth={verifyAuth}/>) } />
 
             <Route exact path="/login" render={props => !isAuthenticated ? (<Login {...props} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>) : (<Redirect to="/Home" />)} />
 

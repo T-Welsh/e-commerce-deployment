@@ -13,3 +13,7 @@
 
 ## Test Data
 Test users password is "password"
+
+## Notes
+
+https://stackoverflow.com/questions/49887018/angular-express-passport-authenticating-with-google-no-access-control-allow
