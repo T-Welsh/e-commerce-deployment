@@ -73,3 +73,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 Burger menu component: https://www.npmjs.com/package/react-burger-menu
 Icons https://icons.getbootstrap.com/#usage
+
+dependencies
+react-google-login 
+js-cookie

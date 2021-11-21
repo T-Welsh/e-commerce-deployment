@@ -89,7 +89,7 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
                     });
                     //console.log(response);
                     const parseRes = await response.json();
-                    console.log(parseRes);
+                    //console.log(parseRes);
                     window.location.href = parseRes;
                     //localStorage.setItem("cart", JSON.stringify(parseRes));
         } catch (err) {

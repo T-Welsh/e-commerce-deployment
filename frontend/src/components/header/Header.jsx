@@ -1,18 +1,20 @@
 import './Header.css';
 import React, { Fragment, useEffect, useState } from 'react';
-import {Link, NavLink} from "react-router-dom";
+import {Link, NavLink, useHistory } from "react-router-dom";
 import BurgerMenu from "../burgerMenu/burgerMenu";
 
 
 const Header = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const history = useHistory();
 
     const logout = (e) => {
         //prevent page refresh
         e.preventDefault()
         localStorage.removeItem('token');
         setAuth(false);
+        history.push('/login');
     }
 
     const handleShopReset = () => {

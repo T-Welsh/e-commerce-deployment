@@ -87,7 +87,7 @@ const UserInfo = () => {
                 method: "PUT",
                 headers: {
                     "content-type" : "application/json;charset=UTF-8",
-                    token: localStorage.token
+                    "token": localStorage.token
                 },
                 mode: 'cors',
                 body: JSON.stringify(body)
