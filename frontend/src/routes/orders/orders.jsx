@@ -3,6 +3,7 @@ import React, {Fragment, useEffect, useState} from "react";
 import { Link } from 'react-router-dom';
 import Header from "../../components/header/Header.jsx";
 import Invoice from "../../components/invoice/invoice.jsx";
+import Footer from "../../components/footer/Footer";
 
 
 const Orders = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
@@ -49,6 +50,7 @@ const Orders = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
                     )
                 })
             }
+            <Footer isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}></Footer>
         </Fragment>
     );
 }; 

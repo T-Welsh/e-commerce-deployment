@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Header from '../../components/header/Header';
 import CartLineItem from '../../components/cartLineItems/CartLineItems';
+import Footer from "../../components/footer/Footer";
 
 const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
 
@@ -117,6 +118,7 @@ console.log(cart);
                 )
             }
             <button onClick={(e) => {handleCheckout(e)}}>Checkout</button>
+            <Footer isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}></Footer>
         </Fragment>
     )
 

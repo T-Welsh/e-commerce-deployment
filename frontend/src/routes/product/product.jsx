@@ -1,6 +1,7 @@
 import './product.css';
 import React, {Fragment, useEffect, useState} from "react";
 import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 import { NavLink } from "react-router-dom";
 
 const Product = ({isAuthenticated, setAuth, match, department, setSearchTerm, setDepartment }) => {
@@ -135,8 +136,7 @@ console.log(image);
                 <option value="5">5</option>
             </select>
             <button onClick={e => addCart(e)}>Add to Cart</button>
-
-
+            <Footer isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}></Footer>
         </Fragment>
     );
 }; 

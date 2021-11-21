@@ -34,6 +34,7 @@
   border-radius: 0rem;
   border-bottom-left-radius: 3rem;
   border-bottom-right-radius: 3rem;
+  border-bottom: 1px solid var(--lightSlate);
   overflow: hidden;
   padding-left: 4.8rem;
   padding-bottom: 2rem;

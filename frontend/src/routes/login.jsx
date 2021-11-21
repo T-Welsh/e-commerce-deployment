@@ -1,6 +1,7 @@
 import React, {Fragment, useState} from "react";
 import {Link} from "react-router-dom";
 import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 
 
 const Login = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
@@ -52,6 +53,7 @@ const Login = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
                 <button type="submit">Login</button>
             </form>
             <Link to="/register">Register</Link>
+            <Footer isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}></Footer>
         </Fragment>
     );
 }; 

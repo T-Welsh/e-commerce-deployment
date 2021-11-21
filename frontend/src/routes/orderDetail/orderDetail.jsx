@@ -2,6 +2,7 @@ import React, {Fragment, useEffect, useState} from "react";
 import Header from "../../components/header/Header.jsx";
 import Invoice from "../../components/invoice/invoice.jsx";
 import InvoiceLineItem from "../../components/invoiceLineItem/invoiceLineItem.jsx";
+import Footer from "../../components/footer/Footer";
 
 
 const OrderDetail = ({isAuthenticated, setAuth, setSearchTerm, setDepartment, match}) => {
@@ -55,6 +56,7 @@ const OrderDetail = ({isAuthenticated, setAuth, setSearchTerm, setDepartment, ma
             </div>
             <p>Total: {invoice.invoiceDetails.invoice_total}</p>
             <p>Status: {invoice.invoiceDetails.shipped? 'Order Shipped': 'Processing Order'}</p>
+            <Footer isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}></Footer>
         </Fragment>
     );
 }; 

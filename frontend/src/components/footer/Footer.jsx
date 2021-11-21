@@ -18,9 +18,9 @@ const Footer = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
                         <h3>Information</h3>
                         {/*<Link to="/home" onClick={()=>{handleShopReset()}}>Shop</Link>*/}
                         <Link to="/dashboard">Account</Link>
-                        <Link to="/home">Terms and Conditions</Link>
-                        <Link to="/home">About Us</Link>
-                        <Link to="/home">Returns</Link>
+                        <Link to="/terms">Terms and Conditions</Link>
+                        <Link to="/about">About Us</Link>
+                        <Link to="/returns">Returns</Link>
                     </nav>
                     <div id="contactContainer">
                         <h3>Contact</h3>
