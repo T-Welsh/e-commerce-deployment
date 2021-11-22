@@ -51,7 +51,7 @@ const Login = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
                 <br/>
                 <button type="submit">Login</button>
             </form>
-            <a href="http://localhost:5000/auth/google"><button googleLoginBtn><i class="bi bi-google"></i> Sign in with Google</button></a>
+            <a href="http://localhost:5000/auth/google"><button class="googleLoginBtn"><i class="bi bi-google"></i> Sign in with Google</button></a>
             <Link to="/register">Register</Link>
             <Footer isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}></Footer>
         </Fragment>

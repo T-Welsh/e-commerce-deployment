@@ -69,7 +69,6 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
                         mode: 'cors',
                     });
                     const parseRes = await response.json();
-                    console.log(parseRes);
                     setCart(parseRes);
                     localStorage.setItem("cart", JSON.stringify(parseRes));
         } catch (err) {
@@ -79,24 +78,19 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
 
     const handleCheckout = async (e) => {
         e.preventDefault();
-        console.log(token);
-        if(token === null){
-            token = "no_token";
+        if(!isAuthenticated){
+            return window.location.href = "http://localhost:3000/login";
         }
-        console.log(token);
         try {
             const response = await fetch("http://localhost:5000/checkout", {
                         method: "POST",
                         headers: {
-                        //"Access-Control-Allow-Origin": "http://localhost:3000",
                         "content-type" : "text/html",
                         "token": token
                         },
                         mode: 'cors',
                     });
-                    //console.log(response);
                     const parseRes = await response.json();
-                    //console.log(parseRes);
                     window.location.href = parseRes;
                     //localStorage.setItem("cart", JSON.stringify(parseRes));
         } catch (err) {
