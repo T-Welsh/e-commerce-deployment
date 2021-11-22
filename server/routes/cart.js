@@ -24,7 +24,6 @@ router.post("/", authorization, async (req, res) => {
         //destructure request body
         const loggedIn = req.loggedIn;
         const { productid, quantity, cart, productname, price } = req.body;
-        console.log(loggedIn);
         if(loggedIn === false){
             //create object for new cart item
             const cartItem = {

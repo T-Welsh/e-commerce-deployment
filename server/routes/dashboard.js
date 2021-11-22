@@ -8,7 +8,7 @@ require('dotenv').config();
 //GET user info
 router.get("/user", authorization, async (req, res) => {
     try {
-        const user = await pool.query("SELECT user_email, f_name, l_name, address_1, address_2, address_3, county, post_code, telephone FROM users WHERE user_id = $1", [req.user]);
+        const user = await pool.query("SELECT user_email, f_name, l_name, address_1, address_2, address_3, county, post_code, telephone, google_id FROM users WHERE user_id = $1", [req.user]);
         res.json(user.rows[0]);
     } catch (err) {
         console.error(err.message);

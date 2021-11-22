@@ -15,7 +15,7 @@ const ProductOverview = (productDetails) => {
         e.preventDefault();
         let cart = JSON.parse(localStorage.getItem("cart"));
 
-        if(cart === null){
+        if(cart === null || cart === "Not Authorised"){
             cart = [];
         }
 

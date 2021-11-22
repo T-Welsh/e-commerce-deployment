@@ -39,7 +39,14 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
                 }
             }else{
                 const items = await JSON.parse(localStorage.getItem('cart'))
-                setCart(items);
+                if (/*items === null || items === "Not Authorised"*/ typeof(items) === 'object' && items !== null) {
+                    //setCart([])
+                    setCart(items);
+                }else{
+                    //setCart(items);
+                    setCart([])
+                }
+                
             }
             
         }

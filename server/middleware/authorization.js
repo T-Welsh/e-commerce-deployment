@@ -2,28 +2,21 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 module.exports = async (req, res, next) => {
-    try {
-        //destructure token from request header
-        //const jwtToken = req.cookies.token;
-        const jwtToken = req.headers.token;
-        // set user login status for cart path
-        if(req.originalUrl === "/cart"){
-            if(jwtToken === 'no_token'){
+
+    const jwtToken = req.headers.token;
+
+    jwt.verify(jwtToken, process.env.JWT_SECRET, (err, verifiedJwt) => {
+        if (err){
+            if(req.originalUrl === "/cart"){
                 req.loggedIn = false;
-                return next();
+                next();
+            }else{
+                console.error(err.message);
+                res.status(403).json("Not Authorised");
             }
+        }else{
+            req.user = verifiedJwt.user;
+            next();
         }
-         //check token exists
-        if(jwtToken === 'no_token'){
-            return res.status(403).json("Not Authorized")
-        }
-        //check token is valid
-        const payload = jwt.verify(jwtToken, process.env.JWT_SECRET);
-        //attach validated token to req
-        req.user = payload.user
-        next();
-    } catch (err) {
-        console.error(err.message);
-        return res.status(403).json("Not Authorised");
-    }
+    });
 }

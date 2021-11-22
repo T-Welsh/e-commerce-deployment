@@ -1,6 +1,6 @@
 import React, {Fragment, useEffect, useState} from "react";
 
-const UserInfo = () => {
+const UserInfo = ({setIsPassportUser}) => {
     const [user, setUser] = useState({
         email: "",
         fname: "",
@@ -52,6 +52,9 @@ const UserInfo = () => {
                     telephone: parseRes.telephone
                 }
             );
+            if (parseRes.google_id) {
+                setIsPassportUser(true);
+            }
         } catch (err) {
             console.error(err.message);
         }
@@ -165,7 +168,7 @@ const UserInfo = () => {
                     <p>{user.address3}</p>
                     <p>{user.county}</p>
                     <p>{user.postcode}</p>
-                    <button onClick={() => { setAddressEdit(true); } }>Edit Details</button>
+                    <button onClick={() => { setAddressEdit(true); getUser()} }>Edit Details</button>
                 </div>
                 </>
             }

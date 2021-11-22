@@ -31,6 +31,7 @@ module.exports = (req, res, next) => {
     }
     //check address is valid
     function validAddress (userAdd1, userAdd2, userAdd3, userCounty, userPostcode){
+        //address validation is handle by Stripe during checkout
         if(![userAdd1, userCounty, userPostcode].every(Boolean)){
             return false;
         }
@@ -38,8 +39,9 @@ module.exports = (req, res, next) => {
     }
     //check phone number is valid
     function validPhone (userPhone) {
+        //Phone can be either null or a valid UK number
         if(!userPhone){
-            return false;
+            return true;
         }
         return /(((\+44)? ?(\(0\))? ?)|(0))( ?[0-9]{3,4}){3}/.test(userPhone);
     }
@@ -74,9 +76,11 @@ module.exports = (req, res, next) => {
         if(!validName(fname, lname)){
             return res.status(401).json("Invalid Name");
         }
+        /*
         if(!validAddress(address1, address2, address3, county, postcode)){
             return res.status(401).json("Invalid Address");
         }
+        */
         if(!validPhone(telephone)){
             return res.status(401).json("Invalid Phone Number");
         }
