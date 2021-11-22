@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Dashboard from './routes/dashboard';
-import Login from './routes/login';
+import Login from './routes/login/login';
 import Register from './routes/resgister';
 import { Fragment, useState, useEffect } from 'react';
 import Home from './routes/home/home';

@@ -1,3 +1,6 @@
+#homeContainer .contentBody {
+    margin-top: 183.68px;
+}
 
 #productListContainer {
     padding-top: 0.6rem;
@@ -9,6 +12,12 @@
         grid-auto-rows: auto;
         column-gap: 1rem;
         row-gap: 1rem;
+}
+
+@media only screen and (min-width: 336px){
+    #homeContainer .contentBody {
+        margin-top: 143.68px;
+    }
 }
 
 @media only screen and (min-width: 767px) {

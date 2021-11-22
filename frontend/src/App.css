@@ -23,7 +23,8 @@
 }
 
 .contentBody {
-  margin-top: 183.68px;
+  /*margin-top: 183.68px;*/
+  margin-top: 97.92px;
   display: flex;
       flex-direction: column;
       align-items: center;
@@ -52,7 +53,7 @@
 @media only screen and (min-width: 336px) {
 
   .contentBody {
-      margin-top: 143.68px;
+      margin-top: 57.92px;
   }
 
   .subHeadings {

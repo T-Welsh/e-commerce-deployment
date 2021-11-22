@@ -52,7 +52,7 @@ const Header = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
     return(
         <Fragment>
             <header id='header'>
-                <NavLink to='/home' onClick={()=>{handleShopReset()}}><h1 id='companyName' >The Suffolk Company</h1></NavLink>
+                <NavLink to='/home' onClick={()=>{handleShopReset()}} id="h1Link"><h1 id='companyName' >The Suffolk Company</h1></NavLink>
                 {renderMenu(windowWidth)}
             </header>
         </Fragment>
