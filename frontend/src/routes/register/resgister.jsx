@@ -1,7 +1,8 @@
+import './register.css';
 import React, {Fragment, useState} from "react";
 import {Link} from "react-router-dom"
-import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
+import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 
 const Register = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
     const [inputs, setInputs] = useState({
@@ -45,18 +46,19 @@ const Register = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
 
         <Fragment>
             <Header isAuthenticated={isAuthenticated} setAuth={setAuth}  setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
-            <h1>Register</h1>
-            <form onSubmit={onSubmitForm}>
-                <input type="email" name="email" placeholder="email" value={email} onChange={e => onChange(e)} />
-                <br/>
-                <input type="password" name="password" placeholder="password" value={password} onChange={e => onChange(e)} />
-                <br/>
-                <input type="text  " name="fname" placeholder="First Name" value={fname} onChange={e => onChange(e)} />
-                <br/>
-                <input type="text" name="lname" placeholder="Surname" value={lname} onChange={e => onChange(e)} />
-                <br/>
-                <button type="submit">Submit</button>
-            </form>
+            <body  className="contentContainer">
+                <div className="contentBody">
+                    <h1 className="subHeadings" id="registerSubHdg">Register</h1>
+                    <form id="registerForm" onSubmit={onSubmitForm}>
+                        <input className="registerInput" type="email" name="email" placeholder="email" value={email} onChange={e => onChange(e)} />
+                        <input className="registerInput" type="password" name="password" placeholder="password" value={password} onChange={e => onChange(e)} />
+                        <input className="registerInput" type="text  " name="fname" placeholder="First Name" value={fname} onChange={e => onChange(e)} />
+                        <input className="registerInput" type="text" name="lname" placeholder="Surname" value={lname} onChange={e => onChange(e)} />
+                        <button class="registerBtn" type="submit">Create Acount</button>
+                    </form>
+                </div>
+            </body>
+            
             <Footer isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}></Footer>
             <Link to="/Login">Login</Link>
         </Fragment>
