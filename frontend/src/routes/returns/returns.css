@@ -1,0 +1,28 @@
+#returnsBody {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+#returnsBody h3 {
+    color: var(--slate);
+    margin-top: 2rem;
+    font-size: 1rem;
+}
+
+#returnsBody p {
+    color: var(--slate);
+    margin-top: 0.2rem;
+}
+
+@media only screen and (min-width: 767px) {
+    
+    #returnsBody{
+        width: 70vw;
+        margin-left: 15vw;
+    }
+
+    #returnsPageHeading {
+        width: 100%;
+        text-align: center;
+    }
+}

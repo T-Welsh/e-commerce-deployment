@@ -1,0 +1,22 @@
+#aboutBody {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+#aboutBody p {
+    color: var(--slate);
+    margin-top: 1rem;
+}
+
+@media only screen and (min-width: 767px) {
+    
+    #aboutBody{
+        width: 70vw;
+        margin-left: 15vw;
+    }
+
+    #aboutSubHeading {
+        width: 100%;
+        text-align: center;
+    }
+}

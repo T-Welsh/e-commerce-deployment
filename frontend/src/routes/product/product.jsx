@@ -22,12 +22,7 @@ const Product = ({isAuthenticated, setAuth, match, department, setSearchTerm, se
                     "image_id": "",
                     "product_id": "",
                     "image_address": ""
-                },
-                {
-                    "image_id": "",
-                    "product_id": "",
-                    "image_address": ""
-                }
+                }              
             ]
             
         }
@@ -107,35 +102,40 @@ const Product = ({isAuthenticated, setAuth, match, department, setSearchTerm, se
         setQuantity(intValue);
     }
 
-//console.log(product.productDetails[0].product_name);
-//console.log(product.productDetails[0].product_name);
-console.log(image);
     return (
         <Fragment>
             <Header isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
-            <h3><NavLink to="/home">{department === '' ? `Back to All Departments`: `Back to ${department}`}</NavLink></h3>
-            <h2>{product.productDetails[0].product_name}</h2>
-            <p>{product.productDetails[0].product_price}</p>
-            <p>{product.productDetails[0].product_description}</p>
-            <img src={image} alt={product.productDetails[0].product_name} />
-            <ul id="imageList">
-                {product.productImages.map(element => {
-                    return(
-                        <li class="imagePreview">
-                            <img class="imagePreview" src={element.image_address} alt={product.productDetails[0].product_name} onClick={()=>{handleImageClick(element.image_address)}}/>
-                        </li>
-                    )
-                })}
-            </ul>
-            <label htmlFor="quantity">Quantity:</label>
-            <select name="quantity" id="quantity" onChange={e => onChange(e)}>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-            <button onClick={e => addCart(e)}>Add to Cart</button>
+            <body className="contentContainer" >
+                <div className="contentBody" id="productBody">
+                    <NavLink to="/home" id="shopPath"><h2 className="subHeadings" >&#x22D8;{department === '' ? `Back to All Departments`: `Back to ${department}`}</h2></NavLink>
+                    <section id="productInfoContainer">
+                        <img src={image} alt={product.productDetails[0].product_name} id="productImage"/>
+                        <div id="namePrice">
+                            <p>{product.productDetails[0].product_name}. . .</p>
+                            <p>{product.productDetails[0].product_price}</p>
+                        </div>
+                        <p>{product.productDetails[0].product_description}</p>
+                        <ul id="imageList">
+                            {product.productImages.map(element => {
+                                return(
+                                    <li class="imagePreview" key={element.image_id}>
+                                        <img class="imagePreview" src={element.image_address} alt={product.productDetails[0].product_name} onClick={()=>{handleImageClick(element.image_address)}}/>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                        <label htmlFor="quantity">Quantity:</label>
+                        <select name="quantity" id="quantity" onChange={e => onChange(e)}>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <button onClick={e => addCart(e)}>Add to Cart</button>
+                    </section>
+                </div>
+            </body>
             <Footer isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}></Footer>
         </Fragment>
     );
