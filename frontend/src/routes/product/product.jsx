@@ -109,30 +109,38 @@ const Product = ({isAuthenticated, setAuth, match, department, setSearchTerm, se
                 <div className="contentBody" id="productBody">
                     <NavLink to="/home" id="shopPath"><h2 className="subHeadings" >&#x22D8;{department === '' ? `Back to All Departments`: `Back to ${department}`}</h2></NavLink>
                     <section id="productInfoContainer">
+                        <div id="productBodyA">
                         <img src={image} alt={product.productDetails[0].product_name} id="productImage"/>
-                        <div id="namePrice">
-                            <p>{product.productDetails[0].product_name}. . .</p>
-                            <p>{product.productDetails[0].product_price}</p>
+                        <div id="productBodyB">
+                            <div id="namePrice">
+                                <p>{product.productDetails[0].product_name}. . .</p>
+                                <p>{product.productDetails[0].product_price}</p>
+                            </div>
+                            <div id='addBasket'>
+                                <label htmlFor="quantity">Quantity:</label>
+                                <div>
+                                    <select name="quantity" id="quantity" onChange={e => onChange(e)}>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                    <button id="addCartBtn" onClick={e => addCart(e)}>Add to Cart</button>
+                                </div>
+                            </div>
+                            <p id="productDescription">{product.productDetails[0].product_description}</p>
                         </div>
-                        <p>{product.productDetails[0].product_description}</p>
-                        <ul id="imageList">
-                            {product.productImages.map(element => {
-                                return(
-                                    <li class="imagePreview" key={element.image_id}>
-                                        <img class="imagePreview" src={element.image_address} alt={product.productDetails[0].product_name} onClick={()=>{handleImageClick(element.image_address)}}/>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                        <label htmlFor="quantity">Quantity:</label>
-                        <select name="quantity" id="quantity" onChange={e => onChange(e)}>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <button onClick={e => addCart(e)}>Add to Cart</button>
+                        </div>
+                        <div id="productBodyC">
+                            <div id="imageList">
+                                {product.productImages.map(element => {
+                                    return(
+                                            <img key={element.image_id} class="imagePreview" src={element.image_address} alt={product.productDetails[0].product_name} onClick={()=>{handleImageClick(element.image_address)}}/>
+                                    )
+                                })}
+                            </div>
+                        </div>
                     </section>
                 </div>
             </body>
