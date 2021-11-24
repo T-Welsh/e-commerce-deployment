@@ -1,3 +1,4 @@
+import './UserInfo.css';
 import React, {Fragment, useEffect, useState} from "react";
 
 const UserInfo = ({setIsPassportUser}) => {
@@ -110,68 +111,60 @@ const UserInfo = ({setIsPassportUser}) => {
     return(
 
         <Fragment>
-            <h1>Dashboard</h1>
+            <div className="userInfoContainer"> 
             {isPersonalEdit ?
                 <>
-                <div>
-                    <h2>Personal Details</h2>
-                    <form onSubmit={onSubmitForm}>
+                <div className="userInfo">
+                    <h2 className="subHeadings" >Personal Details</h2>
+                    <form className="userInfoForm" onSubmit={onSubmitForm}>
                         <input type="text  " name="fname" placeholder="First Name" value={fname} onChange={e => onChange(e)} />
-                        <br/>
                         <input type="text" name="lname" placeholder="Surname" value={lname} onChange={e => onChange(e)} />
-                        <br/>
                         <input type="email" name="email" placeholder="email" value={email} onChange={e => onChange(e)} />
-                        <br/>
                         <input type="text  " name="telephone" placeholder="Phone Number" value={telephone} onChange={e => onChange(e)} />
-                        <br/>
                         <button type='submit'>Save</button>
                     </form>
                 </div>
                 </>
             :
                 <>
-                <div>
-                    <h2>Personal Details</h2>
+                <div className="userInfo">
+                    <h2 className="subHeadings" >Personal Details</h2>
                     <p>{user.fname}</p>
                     <p>{user.lname}</p>
                     <p>{user.email}</p>
                     <p>{user.telephone}</p>
-                    <button onClick={() => { setPersonalEdit(true);} }>Edit Details</button>
+                    <button className="userInfoEditBtn" onClick={() => { setPersonalEdit(true);} }>Edit Details</button>
                 </div>
                 </>
             }
             {isAddressEdit ? 
                 <>
-                <div>
-                    <h2>Address</h2>
-                    <form onSubmit={onSubmitForm}>
+                <div className="userInfo">
+                    <h2 className="subHeadings">Address</h2>
+                    <form  className="userInfoForm" onSubmit={onSubmitForm}>
                         <input type="text" name="address1" placeholder="address1" value={address1} onChange={e => onChange(e)} />
-                        <br/>
                         <input type="text  " name="address2" placeholder="address2" value={address2} onChange={e => onChange(e)} />
-                        <br/>
                         <input type="text" name="address3" placeholder="address3" value={address3} onChange={e => onChange(e)} />
-                        <br/>
                         <input type="text" name="county" placeholder="county" value={county} onChange={e => onChange(e)} />
-                        <br/>
                         <input type="text" name="postcode" placeholder="postcode" value={postcode} onChange={e => onChange(e)} />
-                        <br/>
                         <button type='submit'>Save</button>
                     </form>
                 </div>
                 </>
             :
                 <>
-                <div>
-                    <h2>Address</h2>
+                <div className="userInfo">
+                    <h2 className="subHeadings">Address</h2>
                     <p>{user.address1}</p>
                     <p>{user.address2}</p>
                     <p>{user.address3}</p>
                     <p>{user.county}</p>
                     <p>{user.postcode}</p>
-                    <button onClick={() => { setAddressEdit(true); getUser()} }>Edit Details</button>
+                    <button className="userInfoEditBtn" onClick={() => { setAddressEdit(true); getUser()} }>Edit Details</button>
                 </div>
                 </>
             }
+            </div>
         </Fragment>
     )
  

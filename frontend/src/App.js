@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import Dashboard from './routes/dashboard';
+import Dashboard from './routes/dashboard/dashboard';
 import Login from './routes/login/login';
 import Register from './routes/register/resgister';
 import { Fragment, useState, useEffect } from 'react';

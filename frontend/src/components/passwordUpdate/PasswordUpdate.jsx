@@ -1,3 +1,4 @@
+import './PasswordUpdate.css';
 import { useEffect, useState } from 'react';
 
 const PasswordUpdate = () => {
@@ -9,6 +10,8 @@ const PasswordUpdate = () => {
     });
 
     const [isMatch, setIsMatch] = useState(true);
+
+    const [updateFail, setUpdateFail] = useState(false);
 
     const [updateSuccess, setUpdateSuccess] = useState(false);
 
@@ -57,6 +60,8 @@ const PasswordUpdate = () => {
                 const parseRes = await response.json();
                 if(parseRes === "Password Updated"){
                     setUpdateSuccess(true);
+                }else{
+                    setUpdateFail(true);
                 }
     
             } catch (err) {
@@ -67,18 +72,18 @@ const PasswordUpdate = () => {
 
     return(
         <div id='passwordUpdateContainer'>
-            <h2>Update Password</h2>
-            <form onSubmit={onSubmitForm}>
-            <input type="password" name="password" placeholder="password" value={password} onChange={e => onChange(e)}/>
-            <br/>
-            <input type="password" name="newPassword" placeholder="New Password" value={newPassword} onChange={e => onChange(e)}/>
-            <br/>
-            <input type="password" name="repeatedPassword" placeholder="Repeat password" value={repeatedPassword} onChange={e => onChange(e)}/>
-            <br/>
-            <button type="submit">Update Password</button>
-            {isMatch ? null : <p>passwords don't match</p>}
-            {updateSuccess ? <p>Password Updated</p> : null}
-            </form>
+            <div className="passwordInfo">
+                <h2 className="subHeadings">Update Password</h2>
+                {isMatch ? null : <p className="passwordError" >Passwords don't match</p>}
+                {updateFail ? <p className="passwordError" >Password Invalid</p> : null}
+                {updateSuccess ? <p id="passwordUpdate">Password Updated</p> : null}
+                <form onSubmit={onSubmitForm}>
+                <input type="password" name="password" placeholder="password" value={password} onChange={e => onChange(e)}/>
+                <input type="password" name="newPassword" placeholder="New Password" value={newPassword} onChange={e => onChange(e)}/>
+                <input type="password" name="repeatedPassword" placeholder="Repeat password" value={repeatedPassword} onChange={e => onChange(e)}/>
+                <button type="submit">Update Password</button>
+                </form>
+            </div>
         </div>
     )
 

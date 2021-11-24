@@ -1,0 +1,69 @@
+
+#orderHistory{
+    margin-top: 1rem;
+    width: 100%;
+}
+
+#orderHistory a{
+    padding: 0.36rem;
+    position: relative;
+    background-color: var(--lightSlate);
+
+}
+
+#orderHistory a:hover {
+    background-color: var(--slate);
+}
+
+
+#orderHistory a:after{
+    content:"";
+    position:absolute;
+    left:99.9%;
+    top:0;
+    border:1rem solid transparent;
+    border-left: 1rem solid var(--lightSlate);
+}
+
+#orderHistory a:hover::after{
+    border-left-color: var(--slate);
+}
+
+#googleLogin {
+    max-width: 213.6px;
+    color: #757575;
+    background-color: #fff;
+    width: 100%;
+    height: 30px;
+    display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+        align-items: center;
+    border-width: 1.2px;
+    border-style: solid;
+    border-color: var(--lightSlate);
+    border-radius: 1rem;
+}
+
+@media only screen and (min-width: 767px) {
+
+    #accountBody {
+        max-width: 70vw;
+        margin-left: 15vw;
+    }
+
+    #orderHistory{
+        display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+    }
+}
+
+@media only screen and (min-width: 1350px) {
+    
+    #accountBody {
+        width: 60vw;
+        margin-left: 20vw;
+    }
+}

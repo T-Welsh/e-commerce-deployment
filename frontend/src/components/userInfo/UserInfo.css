@@ -1,0 +1,60 @@
+ .userInfoContainer {
+    width: calc(100% - 2rem);
+     margin: 1rem;
+     border-radius: 1rem;
+     border-bottom: 1px solid var(--suede);
+     display: flex;
+        flex-direction: column;
+    background-color: var(--lightSlate);
+ }
+
+ .userInfoContainer .subHeadings {
+     padding-left: 0;
+     margin-top: 1rem;
+     margin-bottom: .5rem;
+     color: var(--white);
+     font-weight: 600;
+ }
+
+ .userInfo {
+     /*width: calc(100% - 2rem);*/
+     margin-left: 1rem;
+     padding-bottom: 0.8rem;
+     display: flex;
+        flex-direction: column;
+ }
+
+ .userInfo:first-of-type {
+     border-bottom: 1px solid var(--white);
+ }
+
+ .userInfoEditBtn{
+     padding-right: 1rem;
+     background-color: transparent;
+     border: none;
+     font-size: 0.8rem;
+     text-align: right;
+ }
+
+ .userInfoForm{
+     display: flex;
+        flex-direction: column;
+ }
+
+ .userInfoForm input{
+     color: var(--slate);
+ }
+
+ .userInfoForm button{
+    margin-top: 0.6rem;
+    padding-right: 1rem;
+    background-color: transparent;
+    border: none;
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+@media only screen and (min-width: 767px) {
+    
+}
+

@@ -24,7 +24,7 @@ const BurgerMenu = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) =>
         <Menu /*right*/ >
             <NavLink to="/home" className="menu-item" onClick={()=>{handleShopReset()}}>Shop</NavLink>
             {isAuthenticated ? <NavLink to="/login" className="menu-item" onClick={ e => logout(e)}>Logout</NavLink> : <NavLink to="/login" className="menu-item">Login or Register</NavLink>}
-            <NavLink to="/dashboard" className="menu-item">Dashboard</NavLink>
+            <NavLink to="/dashboard" className="menu-item">Account</NavLink>
             <NavLink to="/cart" className="menu-item">Basket</NavLink>
         </Menu>
         </div>
