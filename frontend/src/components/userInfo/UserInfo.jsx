@@ -63,6 +63,7 @@ const UserInfo = ({setIsPassportUser}) => {
 
     useEffect(() => {
         getUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     //console.log(user);
 
@@ -87,7 +88,7 @@ const UserInfo = ({setIsPassportUser}) => {
         try {
             const body = { email, fname, lname, address1, address2, address3, county, postcode, telephone }
 
-            const response = await fetch("http://localhost:5000/dashboard/user", {
+             await fetch("http://localhost:5000/dashboard/user", {
                 method: "PUT",
                 headers: {
                     "content-type" : "application/json;charset=UTF-8",
@@ -97,7 +98,7 @@ const UserInfo = ({setIsPassportUser}) => {
                 body: JSON.stringify(body)
             });
 
-            const parseRes = await response.json();
+            /*const parseRes = await response.json();*/
             getUser();
             setPersonalEdit(false);
             setAddressEdit(false);

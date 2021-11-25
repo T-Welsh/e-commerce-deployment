@@ -22,6 +22,7 @@ const Home = ({isAuthenticated, setAuth, searchTerm, setSearchTerm, department, 
 
     useEffect(()=>{
         initHome(); 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
     return (

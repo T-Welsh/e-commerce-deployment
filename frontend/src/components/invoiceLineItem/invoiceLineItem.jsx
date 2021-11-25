@@ -1,3 +1,4 @@
+import "./invoiceLineItem.css";
 import React, {Fragment, useEffect, useState} from "react";
 
 const InvoiceLineItem = ({id, element}) => {
@@ -48,10 +49,15 @@ const InvoiceLineItem = ({id, element}) => {
 
     return (
         <Fragment>
-            <img src={`http://localhost:5000/productImages/${id}/${id}_1.jpg`} alt={item.productDetails[0].product_name} style={{maxWidth: "60px", maxHeight: "60px"}}/>
-            <p>{item.productDetails[0].product_name}</p>
-            <p>Quantity: {element.order_quantity}</p>
-            <p>Line Total: £{element.order_quantity * parseFloat(element.unit_price.slice(1))}</p>
+            <div className="invoiceLineItemContainer">
+                <img src={`http://localhost:5000/productImages/${id}/${id}_1.jpg`} alt={item.productDetails[0].product_name} />
+                <div className="invLineItemTextContainer">
+                    <p>{item.productDetails[0].product_name}</p>
+                    <p>Quantity: {element.order_quantity}</p>
+                    <p>Line Total: £{element.order_quantity * parseFloat(element.unit_price.slice(1))}</p>
+                </div>
+                
+            </div>
         </Fragment>
     );
 }; 

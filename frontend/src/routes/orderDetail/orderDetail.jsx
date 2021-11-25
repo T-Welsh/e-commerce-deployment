@@ -1,3 +1,4 @@
+import './orderDetail.css';
 import React, {Fragment, useEffect, useState} from "react";
 import Header from "../../components/header/Header.jsx";
 import Invoice from "../../components/invoice/invoice.jsx";
@@ -43,19 +44,22 @@ const OrderDetail = ({isAuthenticated, setAuth, setSearchTerm, setDepartment, ma
     return (
         <Fragment>
             <Header isAuthenticated={isAuthenticated} setAuth={setAuth}  setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
-            <h1>Invoice Detail</h1>
-            <div>
-                <Invoice invoiceDetail={invoice.invoiceDetails}/>
-            </div>
-            <div>
-                {invoice.lineItems.map(element=> {
-                    return(
-                            <InvoiceLineItem key={element.product_id} id={element.product_id} element={element}/>
-                    )   
-                })}
-            </div>
-            <p>Total: {invoice.invoiceDetails.invoice_total}</p>
-            <p>Status: {invoice.invoiceDetails.shipped? 'Order Shipped': 'Processing Order'}</p>
+            <body className="contentContainer">
+                <div className="contentBody" id="invoiceDetailBody">
+                    <div id="invCompContainer">
+                        <Invoice invoiceDetail={invoice.invoiceDetails}/>
+                    </div>
+                    <div id="lineItemsContainer">
+                        {invoice.lineItems.map(element=> {
+                            return(
+                                    <InvoiceLineItem key={element.product_id} id={element.product_id} element={element}/>
+                            )   
+                        })}
+                    </div>
+                    <p className="invStatusText" >Total: {invoice.invoiceDetails.invoice_total}</p>
+                    <p className="invStatusText" >Status: {invoice.invoiceDetails.shipped? 'Order Shipped': 'Processing Order'}</p>
+                </div>
+            </body>
             <Footer isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}></Footer>
         </Fragment>
     );

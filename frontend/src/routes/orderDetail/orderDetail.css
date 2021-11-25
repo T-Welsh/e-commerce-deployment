@@ -1,0 +1,30 @@
+
+#lineItemsContainer {
+    /*width: calc(100% -2rem);*/
+    width: 100%;
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+}
+
+.invStatusText {
+    margin-top: 1rem;
+    color: var(--slate);
+}
+
+@media only screen and (min-width: 767px) {
+    #invoiceDetailBody {
+        max-width: 70vw;
+        margin-left: 15vw;
+    }
+
+}
+
+@media only screen and (min-width: 1350px) {
+
+    #invoiceDetailBody {
+        max-width: 60vw;
+        margin-left: 20vw;
+    }
+
+}

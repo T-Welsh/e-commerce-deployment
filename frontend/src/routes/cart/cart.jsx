@@ -106,7 +106,10 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
                 <div className="contentBody" id="cartBody">
                     <h2 className="subHeadings" id="cartSubHdg">Your Basket</h2>      
                     {
-                        cart.length <1 ? <p>Cart Empty</p> : 
+                        cart.length <1 ? 
+                            <div id="cartItemsContainer">
+                                <p id={"cartEmptyMessage"}>Cart Empty</p>
+                            </div> : 
                         (
                             <div id="cartItemsContainer">
                                 {cart.map(element => {

@@ -6,6 +6,13 @@
     width: 100%;
 }
 
+#cartEmptyMessage {
+    width: 100%;
+    margin-top: 1rem;
+    color: var(--slate);
+    text-align: center;
+}
+
 #cartSubHdg {
     width: calc(100% - 2rem);
     font-size: 1.2rem;

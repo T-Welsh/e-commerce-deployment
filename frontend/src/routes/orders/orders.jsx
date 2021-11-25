@@ -37,19 +37,23 @@ const Orders = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
     return (
         <Fragment>
             <Header isAuthenticated={isAuthenticated} setAuth={setAuth}  setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
-            <h1>Order History</h1>
-            {
-                invoices.map(element => {
-                    console.log(element);
-                    return(
-                        <Link to={`/orders${element.invoice_id}`}>
-                        <div class="invoiceContainer">
-                            <Invoice key={element.invoice_id} invoiceDetail={element}/>
-                        </div>
-                        </Link>
-                    )
-                })
-            }
+            <body className="contentContainer">
+                <div className="contentBody" id="orderHistoryBody">
+                    <h2 className="subHeadings" id="orderHistorySubHdg" >Order History</h2>
+                    {
+                        invoices.map(element => {
+                            console.log(element);
+                            return(
+                                <Link to={`/orders${element.invoice_id}`} className="invoiceLink">
+                                <div class="invoiceContainer">
+                                    <Invoice key={element.invoice_id} invoiceDetail={element}/>
+                                </div>
+                                </Link>
+                            )
+                        })
+                    }
+                </div>
+            </body>
             <Footer isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}></Footer>
         </Fragment>
     );

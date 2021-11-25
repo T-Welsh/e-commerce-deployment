@@ -1,0 +1,59 @@
+.invoice {
+    width: calc(100% - 2rem);
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--productDisplay);
+    border-radius: 1rem;
+}
+
+.invNumberContainer {
+    display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+}
+
+.invoiceNumber {
+    color: var(--slate);
+}
+
+.invDateContainer {
+    margin-top: 0.3rem;
+    display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+}
+
+.invoiceDate {
+    color: var(--slate);
+}
+
+
+.invoiceData {
+    margin-top: 0.5rem;
+    color: var(--white);
+    /*border-bottom: 1px dotted var(--white);*/
+}
+
+.deliveryContainer{
+    margin-top: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 0.5rem;
+    background-color: var(--lightSlate);
+    border-bottom: 1px solid var(--suede);
+    border-radius: 1rem;
+}
+
+.invHeading {
+    color: var(--white);
+    font-weight: 600;
+}
+
+.invDetails {
+    margin-top: 0.5rem;
+    color: var(--slate);
+    text-align: right;
+}
+

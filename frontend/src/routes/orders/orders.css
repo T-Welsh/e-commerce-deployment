@@ -1,3 +1,30 @@
+.invoiceLink {
+    width: calc(100% - 2rem);
+}
+
+@media only screen and (min-width: 767px) {
+    #orderHistoryBody {
+        max-width: 70vw;
+        margin-left: 15vw;
+    }
+
+    #orderHistorySubHdg {
+        max-width: 70vw;
+    }
+}
+
+@media only screen and (min-width: 1350px) {
+
+    #orderHistoryBody {
+        max-width: 60vw;
+        margin-left: 20vw;
+    }
+
+    #orderHistorySubHdg {
+        max-width: 60vw;
+    }
+}
+
 /*
 .invoiceContainer{
     display: flex;
