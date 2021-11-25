@@ -25,7 +25,6 @@ const Orders = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
                         mode: 'cors'
                 })
                 const parseRes = await response.json()
-                console.log(parseRes);
                 setInvoices(parseRes);
             } catch (err) {
                 console.error(err.message)
@@ -42,13 +41,14 @@ const Orders = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
                     <h2 className="subHeadings" id="orderHistorySubHdg" >Order History</h2>
                     {
                         invoices.map(element => {
-                            console.log(element);
                             return(
+                                <div key={element.invoice_id}>
                                 <Link to={`/orders${element.invoice_id}`} className="invoiceLink">
                                 <div class="invoiceContainer">
-                                    <Invoice key={element.invoice_id} invoiceDetail={element}/>
+                                    <Invoice invoiceDetail={element}/>
                                 </div>
                                 </Link>
+                                </div>
                             )
                         })
                     }

@@ -7,6 +7,7 @@ const authorization = require("../middleware/authorization");
 router.get("/", authorization, async (req, res) => {
     try {
         const orders = await pool.query("SELECT invoice_id, invoice_date, addressee, delivery_address_1, delivery_address_2, delivery_address_3, delivery_county, delivery_post_code, invoice_total, shipped FROM invoices WHERE customer_id = $1", [req.user]);
+        orders.rows.sort((a, b) => parseFloat(b.invoice_id) - parseFloat(a.invoice_id));
         res.json(orders.rows);
     } catch (err) {
         console.error(err.message);

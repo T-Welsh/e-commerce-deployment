@@ -114,7 +114,9 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
                             <div id="cartItemsContainer">
                                 {cart.map(element => {
                                     return(
-                                        <CartLineItem key={element.product_id} product={element} setCart={setCart}/>
+                                        <div key={element.product_id}>
+                                        <CartLineItem  product={element} setCart={setCart}/>
+                                        </div>
                                     )
                                     })
                                 }
