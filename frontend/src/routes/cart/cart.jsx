@@ -1,3 +1,4 @@
+import './cart.css';
 import React, { Fragment, useEffect, useState } from 'react';
 import Header from '../../components/header/Header';
 import CartLineItem from '../../components/cartLineItems/CartLineItems';
@@ -98,27 +99,31 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
         }
     }
 
-
-console.log(cart);
     return(
         <Fragment>
             <Header isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}/>
-            <h2>Cart</h2>      
-            {
-                cart.length <1 ? <h3>Cart Empty</h3> : 
-                (
-                    <div>
-                        {cart.map(element => {
-                            return(
-                                <CartLineItem key={element.product_id} product={element} setCart={setCart}/>
-                            )
-                            })
-                        }
-                        <button onClick={(e) => {handleClearCart(e)}}>Clear Cart</button>
-                    </div> 
-                )
-            }
-            <button onClick={(e) => {handleCheckout(e)}}>Checkout</button>
+            <body className="contentContainer" id='cartContainer'>
+                <div className="contentBody" id="cartBody">
+                    <h2 className="subHeadings" id="cartSubHdg">Your Basket</h2>      
+                    {
+                        cart.length <1 ? <p>Cart Empty</p> : 
+                        (
+                            <div id="cartItemsContainer">
+                                {cart.map(element => {
+                                    return(
+                                        <CartLineItem key={element.product_id} product={element} setCart={setCart}/>
+                                    )
+                                    })
+                                }
+                                <div id="cartBtnContainer">
+                                    <button onClick={(e) => {handleClearCart(e)}}>Clear Cart</button>
+                                </div>
+                            </div> 
+                        )
+                    }
+                    <button id="checkoutBtn" onClick={(e) => {handleCheckout(e)}}>Checkout</button>
+                </div>
+            </body>
             <Footer isAuthenticated={isAuthenticated} setAuth={setAuth} setSearchTerm={setSearchTerm} setDepartment={setDepartment}></Footer>
         </Fragment>
     )

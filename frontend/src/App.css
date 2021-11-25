@@ -7,6 +7,7 @@
   --white: #f5f5f5;
   --suede: #c5bbb1;
   --darkSlate: #2f4f4f;
+  --productDisplay: rgba(211, 211, 211, 0.645);
   background-color: var(--suede);
   --headings-font-family: 'Merriweather', serif;
   --page-text-font-family: 'Merriweather Sans', sans-serif;

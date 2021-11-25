@@ -1,0 +1,91 @@
+.lineItem {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+    background-color: var(--productDisplay);
+    border: .8px solid var(--lightSlate);
+    border-radius: 1rem;
+}
+
+.lineItem img{
+    margin-top: 1rem;
+    max-width: 80px;
+    border-radius: 1rem;
+}
+
+.cartLineItemTextContainer {
+    width: calc(100% - 2rem);
+    display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+}
+
+.lineItem p{
+    margin-top: 0.3rem;
+    color: var(--slate);   
+}
+
+.cartLineItemQuantityContainer{
+    width: calc(100% - 2rem);
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+}
+
+.cartLineItemQuantityContainer label{
+    margin-top: 0.3rem;
+    color: var(--slate);
+}
+
+.cartLineItemQuantityContainer input{
+    width: 3rem;
+    margin-top: 0.3rem;
+    color: var(--slate);
+    border: none;
+}
+
+.cartLineItemQuantityContainer input::-webkit-outer-spin-button{
+    /*-webkit-appearance: none;*/
+    height: 24px;
+    width: 24px;
+    margin-left: .4em;
+    cursor: pointer;
+    color: var(--slate) !important;
+}
+
+.cartLineItemQuantityContainer input::-webkit-inner-spin-button {
+    /*-webkit-appearance: none;*/
+    height: 24px;
+    width: 24px;
+    margin-left: .4em;
+    cursor: pointer;
+    color: var(--slate) !important;
+}
+
+.lineItem button {
+    margin-top: 0.7rem;
+    margin-bottom: 1rem;
+    padding: 0.2rem;
+    color: var(--slate);
+    border: 1px solid var(--slate);
+    border-radius: 0.5rem;
+}
+
+.lineItem button:hover {
+    color: var(--white);
+    background-color: var(--slate);
+    border: 1px solid var(--white);
+}
+
+@media only screen and (min-width: 767px) {
+
+    .lineItem button {
+        margin-right: 1rem;
+        align-self: flex-end;
+    }
+
+}

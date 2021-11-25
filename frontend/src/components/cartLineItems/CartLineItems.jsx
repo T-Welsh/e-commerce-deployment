@@ -1,3 +1,4 @@
+import './CartLineItems.css';
 import React, { Fragment } from 'react';
 
 const CartLineItem = ({product, setCart}) => {
@@ -73,12 +74,17 @@ const CartLineItem = ({product, setCart}) => {
    
     return(
         <Fragment>
-            <div style={{display: 'flex'}}>
-                <img src={`http://localhost:5000/productImages/${product.product_id}/${product.product_id}_1.jpg`} alt={product.product_name} style={{maxWidth: "60px", maxHeight: "60px"}}/>
-                <p>{product.product_name}</p>
-                <p>{product.product_price}</p>
-                <input type="number" id="quantity name="quantity min="1" value={product.quantity} onChange={(e) => {handleChange(e)}}/>
-                <button onClick={(e) => {handleRemoveItem(e)}}>Remove Item</button>
+            <div className="lineItem">
+                <img src={`http://localhost:5000/productImages/${product.product_id}/${product.product_id}_1.jpg`} alt={product.product_name} />
+                <div className="cartLineItemTextContainer">
+                    <p>{product.product_name}. . .</p>
+                    <p>{product.product_price}</p>
+                </div>
+                <div className="cartLineItemQuantityContainer">
+                    <label htmlFor="quantity">Quantity. . .  </label>
+                    <input type="number" className="quantity" name="quantity" min="1" value={product.quantity} onChange={(e) => {handleChange(e)}}/>
+                </div>
+                <button onClick={(e) => {handleRemoveItem(e)}}>Remove From Basket</button>
             </div>
         </Fragment>
     )
