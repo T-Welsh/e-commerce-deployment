@@ -78,4 +78,3 @@ dependencies
 react-google-login 
 js-cookie
 
-t
