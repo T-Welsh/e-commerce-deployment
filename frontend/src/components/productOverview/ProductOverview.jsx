@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 
 const ProductOverview = (productDetails) => {
 
-    const { REACT_APP_BACK_END_ADDRESS } = process.env;
+    //const { REACT_APP_BACK_END_ADDRESS } = process.env;
 
     const id = productDetails.productdetails.product_id;
     const name = productDetails.productdetails.product_name;
@@ -33,7 +33,7 @@ const ProductOverview = (productDetails) => {
                 token = "no_token";
             }
 
-            const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/cart`, {
+            const response = await fetch(`/cart`, {
                         method: "POST",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
@@ -53,7 +53,7 @@ const ProductOverview = (productDetails) => {
 
     return(
         <Fragment>
-                <img src={`${REACT_APP_BACK_END_ADDRESS}/resources/productImages/${id}/${id}_1.jpg`} alt={name} className="productListImg" />
+                <img src={`/resources/productImages/${id}/${id}_1.jpg`} alt={name} className="productListImg" />
                 <div className="nameAndPriceContainer">
                     <h3 className="productListName">{name}. . .</h3>
                     <p className="productListPrice">{price}</p> 

@@ -46,8 +46,9 @@ app.use("/shop", require("./routes/shop"));
 app.use("/cart", require("./routes/cart"));
 //checkout
 app.use("/checkout", require("./routes/checkout"));
-
+//order history
 app.use("/orders", require("./routes/orders"))
+
 //END ROUTES
 
 app.listen(PORT, () => {

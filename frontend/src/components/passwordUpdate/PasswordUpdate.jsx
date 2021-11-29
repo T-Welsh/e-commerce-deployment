@@ -2,8 +2,6 @@ import './PasswordUpdate.css';
 import { useEffect, useState } from 'react';
 
 const PasswordUpdate = () => {
-
-    const { REACT_APP_BACK_END_ADDRESS } = process.env;
     
     const [inputs, setInputs] = useState({
         password: "",
@@ -49,7 +47,7 @@ const PasswordUpdate = () => {
                     password: newPassword
                 }
     
-                const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/dashboard/user/password`, {
+                const response = await fetch(`/dashboard/user/password`, {
                     method: "PUT",
                     headers: {
                         "content-type" : "application/json;charset=UTF-8",

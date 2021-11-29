@@ -8,8 +8,6 @@ import Footer from "../../components/footer/Footer";
 
 const OrderDetail = ({isAuthenticated, setAuth, setSearchTerm, setDepartment, match}) => {
 
-    const { REACT_APP_BACK_END_ADDRESS } = process.env;
-
     const {params: { id } } = match;
     const [invoice, setInvoice] = useState({
         invoiceDetails:{},
@@ -26,7 +24,7 @@ const OrderDetail = ({isAuthenticated, setAuth, setSearchTerm, setDepartment, ma
         const getOrder = async () => {
             
             try {
-                const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/orders/${id}`, {
+                const response = await fetch(`/orders/${id}`, {
                     method: "GET",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
@@ -42,7 +40,7 @@ const OrderDetail = ({isAuthenticated, setAuth, setSearchTerm, setDepartment, ma
             }
         }
         getOrder();
-    }, [REACT_APP_BACK_END_ADDRESS, id])
+    }, [id])
 
     return (
         <Fragment>

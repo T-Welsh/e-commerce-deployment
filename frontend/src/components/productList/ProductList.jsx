@@ -6,15 +6,13 @@ import ProductOverview from '../productOverview/ProductOverview';
 
 const ProductList = ({searchTerm, department}) => {
 
-    const { REACT_APP_BACK_END_ADDRESS } = process.env;
-
     const [productInfo, setProductInfo] = useState([]);    
 
     useEffect(() => {
         
         const getProducts = async () => {
         try {
-            const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/shop/products`, {
+            const response = await fetch(`/shop/products`, {
                         method: "GET",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
@@ -33,7 +31,7 @@ const ProductList = ({searchTerm, department}) => {
         
         };
         getProducts();
-    }, [searchTerm, department, REACT_APP_BACK_END_ADDRESS]);
+    }, [searchTerm, department]);
 
 
     return(

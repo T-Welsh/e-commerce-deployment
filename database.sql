@@ -1,18 +1,22 @@
 --CREATE DATABASE ecommerce;
 
+-- install the uuid-ossp module
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 --create users table
 CREATE TABLE users(
     user_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_email VARCHAR(255) NOT NULL,
-    user_password VARCHAR(255) NOT NULL,
-    f_name VARCHAR(50) NOT NULL,
-    L_name VARCHAR(50) NOT NULL,
-    address_1 VARCHAR(255) NOT NULL,
+    user_password VARCHAR(255),
+    f_name VARCHAR(50),
+    L_name VARCHAR(50),
+    address_1 VARCHAR(255),
     address_2 VARCHAR(255),
     address_3 VARCHAR(255),
-    county VARCHAR(100) NOT NULL,
-    post_code VARCHAR(8) NOT NULL,
-    telephone VARCHAR(14)
+    county VARCHAR(100),
+    post_code VARCHAR(8),
+    telephone VARCHAR(14),
+    google_id varchar
 );
 
 --create suppliers table

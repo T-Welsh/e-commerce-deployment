@@ -1,8 +1,6 @@
 import './UserInfo.css';
 import React, {Fragment, useEffect, useState} from "react";
 
-const { REACT_APP_BACK_END_ADDRESS } = process.env;
-
 const UserInfo = ({setIsPassportUser}) => {
     const [user, setUser] = useState({
         email: "",
@@ -21,7 +19,7 @@ const UserInfo = ({setIsPassportUser}) => {
 
     const getUser = async () => {
         try {
-            const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/dashboard/user`, {
+            const response = await fetch(`/dashboard/user`, {
                 method: "GET",
                 headers: {
                     token: localStorage.token 
@@ -90,7 +88,7 @@ const UserInfo = ({setIsPassportUser}) => {
         try {
             const body = { email, fname, lname, address1, address2, address3, county, postcode, telephone }
 
-             await fetch(`${REACT_APP_BACK_END_ADDRESS}/dashboard/user`, {
+             await fetch(`/dashboard/user`, {
                 method: "PUT",
                 headers: {
                     "content-type" : "application/json;charset=UTF-8",

@@ -4,9 +4,6 @@ import Header from '../../components/header/Header';
 import CartLineItem from '../../components/cartLineItems/CartLineItems';
 import Footer from "../../components/footer/Footer";
 
-const { REACT_APP_BACK_END_ADDRESS } = process.env;
-//console.log(`server located: ${REACT_APP_BACK_END_ADDRESS}`);
-
 const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
 
     const [cart, setCart] = useState(
@@ -28,7 +25,7 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
             if(isAuthenticated){
                 let token = await localStorage.getItem("token");
                 try {
-                    const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/cart`, {
+                    const response = await fetch(`/cart`, {
                         method: "GET",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
@@ -64,7 +61,7 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
             token = "no_token";
         }
         try {
-            const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/cart`, {
+            const response = await fetch(`/cart`, {
                         method: "DELETE",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
@@ -86,7 +83,7 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
             return window.location.href = "/login";
         }
         try {
-            const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/checkout`, {
+            const response = await fetch(`/checkout`, {
                         method: "POST",
                         headers: {
                         "content-type" : "text/html",

@@ -3,8 +3,6 @@ import React, {Fragment, useEffect, useState} from "react";
 
 const InvoiceLineItem = ({id, element}) => {
 
-    const { REACT_APP_BACK_END_ADDRESS } = process.env;
-
     const [item, setItem] = useState(
         {
             productDetails: [
@@ -33,7 +31,7 @@ const InvoiceLineItem = ({id, element}) => {
                 token = "no_token";
             }
             try {
-                const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/shop/products/${id}`, {
+                const response = await fetch(`http://localhost:5000/shop/products/${id}`, {
                     method: "GET",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
@@ -53,7 +51,7 @@ const InvoiceLineItem = ({id, element}) => {
     return (
         <Fragment>
             <div className="invoiceLineItemContainer">
-                <img src={`${REACT_APP_BACK_END_ADDRESS}/resources/productImages/${id}/${id}_1.jpg`} alt={item.productDetails[0].product_name} />
+                <img src={`http://localhost:5000/resources/productImages/${id}/${id}_1.jpg`} alt={item.productDetails[0].product_name} />
                 <div className="invLineItemTextContainer">
                     <p>{item.productDetails[0].product_name}</p>
                     <p>Quantity: {element.order_quantity}</p>

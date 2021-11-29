@@ -3,8 +3,6 @@ import React, { Fragment } from 'react';
 
 const CartLineItem = ({product, setCart}) => {
 
-    const { REACT_APP_BACK_END_ADDRESS } = process.env;
-
     const handleChange = async (e) => {
         e.preventDefault();
         const changeQuantity = e.target.value - product.quantity ;
@@ -22,7 +20,7 @@ const CartLineItem = ({product, setCart}) => {
             "cart": cart
         }
         try {
-            const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/cart`, {
+            const response = await fetch(`http://localhost:5000/cart`, {
                         method: "POST",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
@@ -56,7 +54,7 @@ const CartLineItem = ({product, setCart}) => {
             "cart": cart
         }
         try {
-            const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/cart`, {
+            const response = await fetch(`http://localhost:5000/cart`, {
                         method: "PUT",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
@@ -77,7 +75,7 @@ const CartLineItem = ({product, setCart}) => {
     return(
         <Fragment>
             <div className="lineItem">
-                <img src={`${REACT_APP_BACK_END_ADDRESS}/resources/productImages/${product.product_id}/${product.product_id}_1.jpg`} alt={product.product_name} />
+                <img src={`http://localhost:5000/resources/productImages/${product.product_id}/${product.product_id}_1.jpg`} alt={product.product_name} />
                 <div className="cartLineItemTextContainer">
                     <p>{product.product_name}. . .</p>
                     <p>{product.product_price}</p>

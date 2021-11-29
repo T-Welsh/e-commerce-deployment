@@ -7,6 +7,7 @@ import Footer from "../../components/footer/Footer";
 const Login = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
 
     const { REACT_APP_BACK_END_ADDRESS } = process.env;
+    console.log(`Back end address is ${REACT_APP_BACK_END_ADDRESS}`);
 
     const [credentialsValid, setCredentialsValid] = useState(true);
 
@@ -30,7 +31,7 @@ const Login = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
 
 
 
-            const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/auth/login`, {
+            const response = await fetch(`/auth/login`, {
                 method: "POST",
                 headers: {"content-type" : "application/json;charset=UTF-8"},
                 mode: 'cors',
