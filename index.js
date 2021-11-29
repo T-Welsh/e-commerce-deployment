@@ -56,7 +56,7 @@ app.get("/*", (req,res) => {
 */
 app.get("*", (req,res) => {
     //res.redirect(process.env.FRONT_END_ADDRESS);
-    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'frontend/build/index.html'));
 });
 //END ROUTES
 
