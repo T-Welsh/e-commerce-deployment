@@ -94,7 +94,7 @@ router.get('/google/redirect', passport.authenticate('google', {session: false/*
         const stringToken = await token.toString();
         //console.log(stringtoken);
 
-        res.redirect(`http://localhost:3000/home?user=${stringToken}`);
+        res.redirect(`${process.env.FRONT_END_ADDRESS}/home?user=${stringToken}`);
 
     } catch (err) {
         console.error(err.message);

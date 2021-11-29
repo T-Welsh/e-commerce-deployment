@@ -7,7 +7,7 @@ const authorization = require("../middleware/authorization");
 const stockcheck = require('../middleware/stockcheck');
 const { v4: uuidv4} = require('uuid'); 
 
-const YOUR_DOMAIN = `http://localhost:${process.env.PORT}`;
+const DOMAIN = `http://localhost:${process.env.PORT}`;
 
 router.post("/", authcheck, authorization, stockcheck, async (req, res) => {
     try {
@@ -30,10 +30,9 @@ router.post("/", authcheck, authorization, stockcheck, async (req, res) => {
             //insert new order into db
             await pool.query("INSERT INTO orders (product_id, order_quantity, invoice_id, unit_price) VALUES ($1, $2, $3, $4)", [productId, quantity, invoiceId, price]);
             //get product image for cart
-            imageURL = `${YOUR_DOMAIN}/productImages/${productId}/${productId}_1.jpg`
+            imageURL = `${DOMAIN}/productImages/${productId}/${productId}_1.jpg`
             //imageURL = 'https://i.imgur.com/1NQuWpK.jpeg';
             //create lineitem
-            //console.log(productId);
             lineItems.push(
                 {
                     price_data: {
@@ -67,8 +66,8 @@ router.post("/", authcheck, authorization, stockcheck, async (req, res) => {
                 allowed_countries: ['GB'],
             },
             billing_address_collection: "required",
-            success_url: `${YOUR_DOMAIN}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${YOUR_DOMAIN}/checkout/cancelled?session_id={CHECKOUT_SESSION_ID}`,
+            success_url: `${DOMAIN}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${DOMAIN}/checkout/cancelled?session_id={CHECKOUT_SESSION_ID}`,
             //idempotencyKey: idempotencyKey
         });;
         //res.redirect(303, session.url);
@@ -84,11 +83,8 @@ router.get('/success', async (req, res) => {
     try {
         const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
         const customer = await stripe.customers.retrieve(session.customer);
-        console.log(session.metadata);
-        console.log(session.shipping);
         const invoiceId = session.metadata.invoice_number;
         const addressee = session.shipping.name;
-        console.log(addressee);
         const add1 = session.shipping.address.line1;
         const add2 = session.shipping.address.line2;
         const add3 = session.shipping.address.city;
@@ -103,9 +99,9 @@ router.get('/success', async (req, res) => {
             //clear cart
             await pool.query("DELETE FROM cart WHERE user_id = $1", [session.metadata.customer]);
             //res.json(session)
-            //res.redirect('http://localhost:3000');
-            res.redirect(`http://localhost:3000/orders${invoiceId}`);
-            //res.redirect('http://localhost:3000/dashboard');
+            //res.redirect('${process.env.FRONT_END_ADDRESS}');
+            res.redirect(`${process.env.FRONT_END_ADDRESS}/orders${invoiceId}`);
+            //res.redirect('${process.env.FRONT_END_ADDRESS}/dashboard');
             //res.send(`<html><body><h1>Thanks for your order, ${customer.name}!</h1></body></html>`);
         } catch (err) {
             console.error(err.message)
@@ -123,7 +119,7 @@ router.get('/cancelled', async (req, res) => {
         const invoiceId = session.metadata.invoice_number;
         await pool.query("Delete FROM orders WHERE invoice_id = $1", [invoiceId]);
         await pool.query("Delete FROM invoices WHERE invoice_id = $1", [invoiceId]);
-        res.redirect(`http://localhost:3000/cancelled`);
+        res.redirect(`${process.env.FRONT_END_ADDRESS}/cancelled`);
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Server Error");

@@ -1,4 +1,4 @@
-CREATE DATABASE ecommerce;
+--CREATE DATABASE ecommerce;
 
 --create users table
 CREATE TABLE users(
@@ -42,15 +42,15 @@ CREATE TABLE products(
 
 --Create cart table
 CREATE TABLE cart(
-    user_id UUID REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE,
-    product_id SERIAL REFERENCES products(product_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    user_id UUID REFERENCES users(user_id) ON UPDATE CASCADE ON DELETE CASCADE NOT NULL,
+    product_id SERIAL REFERENCES products(product_id) ON UPDATE CASCADE ON DELETE CASCADE  NOT NULL,
     quantity INTEGER,
     PRIMARY KEY (user_id, product_id)
 );
 
 --Create invoices table
 CREATE TABLE invoices(
-    invoice_id SERIAL PRIMARY KEY,
+    invoice_id SERIAL PRIMARY KEY NOT NULL,
     invoice_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     customer_id UUID REFERENCES users(user_id),
     addressee VARCHAR(255),
@@ -59,9 +59,10 @@ CREATE TABLE invoices(
     delivery_address_3 VARCHAR(255),
     delivery_county VARCHAR(100),
     delivery_post_code VARCHAR(8),
-    invoice_total MONEY NOT NULL,
+    invoice_total MONEY,
     invoice_paid BOOLEAN NOT NULL DEFAULT false,
-    shipped BOOLEAN NOT NULL DEFAULT false
+    shipped BOOLEAN NOT NULL DEFAULT false,
+    transaction_id VARCHAR
 );
 
 --Create orders table

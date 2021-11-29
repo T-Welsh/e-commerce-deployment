@@ -18,12 +18,16 @@ app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
 
+if(process.env.nodeENV === "production"){
+    //serve static content
+}
+
 //initialize passport
 app.use(passport.initialize());
 
 //ROUTES
 app.get("/", (req,res) => {
-    res.send('<h1>Home</h1>');
+    res.redirect(process.env.FRONT_END_ADDRESS);
 });
 //login and register
 app.use("/auth", require("./routes/auth"));
