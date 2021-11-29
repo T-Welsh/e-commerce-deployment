@@ -33,7 +33,8 @@ app.use(passport.initialize());
 //ROUTES
 /*
 app.get("/", (req,res) => {
-    res.redirect(process.env.FRONT_END_ADDRESS);
+    //res.redirect(process.env.FRONT_END_ADDRESS);
+    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
 });
 */
 //login and register
@@ -48,6 +49,10 @@ app.use("/cart", require("./routes/cart"));
 app.use("/checkout", require("./routes/checkout"));
 //order history
 app.use("/orders", require("./routes/orders"))
+
+app.get("/*", (req,res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
+});
 
 //END ROUTES
 
