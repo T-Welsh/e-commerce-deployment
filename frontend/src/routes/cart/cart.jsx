@@ -4,6 +4,9 @@ import Header from '../../components/header/Header';
 import CartLineItem from '../../components/cartLineItems/CartLineItems';
 import Footer from "../../components/footer/Footer";
 
+const { REACT_APP_BACK_END_ADDRESS } = process.env;
+//console.log(`server located: ${REACT_APP_BACK_END_ADDRESS}`);
+
 const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
 
     const [cart, setCart] = useState(
@@ -25,7 +28,7 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
             if(isAuthenticated){
                 let token = await localStorage.getItem("token");
                 try {
-                    const response = await fetch("http://localhost:5000/cart", {
+                    const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/cart`, {
                         method: "GET",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
@@ -61,7 +64,7 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
             token = "no_token";
         }
         try {
-            const response = await fetch("http://localhost:5000/cart", {
+            const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/cart`, {
                         method: "DELETE",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
@@ -80,10 +83,10 @@ const Cart = ({ isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
     const handleCheckout = async (e) => {
         e.preventDefault();
         if(!isAuthenticated){
-            return window.location.href = "http://localhost:3000/login";
+            return window.location.href = "/login";
         }
         try {
-            const response = await fetch("http://localhost:5000/checkout", {
+            const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/checkout`, {
                         method: "POST",
                         headers: {
                         "content-type" : "text/html",

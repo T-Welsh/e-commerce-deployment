@@ -5,6 +5,9 @@ import Footer from "../../components/footer/Footer";
 import { NavLink } from "react-router-dom";
 
 const Product = ({isAuthenticated, setAuth, match, department, setSearchTerm, setDepartment }) => {
+
+    const { REACT_APP_BACK_END_ADDRESS } = process.env;
+
     const {params: { id } } = match;
     const [product, setProduct] = useState(
         {
@@ -40,7 +43,7 @@ const Product = ({isAuthenticated, setAuth, match, department, setSearchTerm, se
         const initPage = async () => {
             const getProducts = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/shop/products/${id}`, {
+                const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/shop/products/${id}`, {
                             method: "GET",
                             headers: {
                             "content-type" : "application/json;charset=UTF-8",
@@ -62,7 +65,7 @@ const Product = ({isAuthenticated, setAuth, match, department, setSearchTerm, se
             ); 
         }
         initPage();
-    }, [id]);
+    }, [REACT_APP_BACK_END_ADDRESS, id]);
 
     const addCart = async (e) => {
         e.preventDefault();
@@ -79,7 +82,7 @@ const Product = ({isAuthenticated, setAuth, match, department, setSearchTerm, se
                 "cart": cart
             }
 
-            const response = await fetch("http://localhost:5000/cart", {
+            const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/cart`, {
                         method: "POST",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",

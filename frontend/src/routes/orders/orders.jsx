@@ -7,6 +7,9 @@ import Footer from "../../components/footer/Footer";
 
 
 const Orders = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
+
+    const { REACT_APP_BACK_END_ADDRESS } = process.env;
+
     const [invoices, setInvoices] = useState([]);
     // retrive order history from db
     useEffect(() => {
@@ -16,7 +19,7 @@ const Orders = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
                 token = "no_token";
             }
             try {
-                const response = await fetch('http://localhost:5000/orders', {
+                const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/orders`, {
                     method: "GET",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",

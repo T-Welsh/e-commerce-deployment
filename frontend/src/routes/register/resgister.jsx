@@ -5,6 +5,9 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 
 const Register = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
+
+    const { REACT_APP_BACK_END_ADDRESS } = process.env;
+
     const [inputs, setInputs] = useState({
         email: "",
         password: "",
@@ -25,7 +28,7 @@ const Register = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
         try {
             const body = { email, password, fname, lname }
 
-            const response = await fetch("http://localhost:5000/auth/register", {
+            const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/auth/register`, {
                 method: "POST",
                 headers: {"content-type" : "application/json;charset=UTF-8"},
                 mode: 'cors',

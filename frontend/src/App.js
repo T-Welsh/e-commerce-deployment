@@ -16,6 +16,8 @@ import Returns from "./routes/returns/returns";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  const { REACT_APP_BACK_END_ADDRESS } = process.env;
+
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean)
   };
@@ -28,7 +30,7 @@ function App() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:5000/auth/is-verify", {
+      const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/auth/is-verify`, {
                   method: "GET",
                   headers: {
                     "content-type" : "application/json;charset=UTF-8",

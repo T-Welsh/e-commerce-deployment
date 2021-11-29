@@ -7,6 +7,9 @@ import Footer from "../../components/footer/Footer";
 
 
 const OrderDetail = ({isAuthenticated, setAuth, setSearchTerm, setDepartment, match}) => {
+
+    const { REACT_APP_BACK_END_ADDRESS } = process.env;
+
     const {params: { id } } = match;
     const [invoice, setInvoice] = useState({
         invoiceDetails:{},
@@ -17,13 +20,13 @@ const OrderDetail = ({isAuthenticated, setAuth, setSearchTerm, setDepartment, ma
         let token = localStorage.getItem("token");
             if(token === null){
                 token = "no_token";
-                window.location.href = 'http://localhost:3000';
+                window.location.href = '/';
             }
         
         const getOrder = async () => {
             
             try {
-                const response = await fetch(`http://localhost:5000/orders/${id}`, {
+                const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/orders/${id}`, {
                     method: "GET",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
@@ -39,7 +42,7 @@ const OrderDetail = ({isAuthenticated, setAuth, setSearchTerm, setDepartment, ma
             }
         }
         getOrder();
-    }, [id])
+    }, [REACT_APP_BACK_END_ADDRESS, id])
 
     return (
         <Fragment>

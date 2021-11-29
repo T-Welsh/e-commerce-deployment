@@ -4,12 +4,13 @@ const cors = require('cors');
 const passportSetup = require('./utils/passport');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 require('dotenv').config();
 
 const PORT = process.env.PORT || 5000;
 
 //set root directory for referencing static files 
-app.use(express.static('C:/Users/salth/Documents/programming/projects/e-commerce-full-stack/resources'));
+//app.use(express.static('C:/Users/salth/Documents/programming/projects/e-commerce-full-stack/resources'));
 //app.use(express.static(path.join(__dirname,  '../')));
 
 //middleware
@@ -20,15 +21,21 @@ app.use(cookieParser());
 
 if(process.env.nodeENV === "production"){
     //serve static content
+    app.use(express.static(path.join(__dirname, "frontend/build")));
+}else{
+    //app.use(express.static(path.join(__dirname, "resources")));
+    app.use(express.static(__dirname));
 }
 
 //initialize passport
 app.use(passport.initialize());
 
 //ROUTES
+/*
 app.get("/", (req,res) => {
     res.redirect(process.env.FRONT_END_ADDRESS);
 });
+*/
 //login and register
 app.use("/auth", require("./routes/auth"));
 //user dashboard

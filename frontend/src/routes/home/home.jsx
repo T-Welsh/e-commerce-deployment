@@ -12,7 +12,7 @@ const Home = ({isAuthenticated, setAuth, searchTerm, setSearchTerm, department, 
     const search = useLocation().search;
     const user = new URLSearchParams(search).get('user');
 
-    //Save query params to local storage if user is not authenticated. This is used when user signs in using passportjs as server endpoint redirects to localhost:3000/home
+    //Save query params to local storage if user is not authenticated. This is used when user signs in using passportjs as server endpoint redirects to /home
     const initHome = () => {
         if(!isAuthenticated){
             localStorage.setItem("token", user);

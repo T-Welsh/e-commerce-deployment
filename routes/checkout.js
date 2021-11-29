@@ -7,7 +7,7 @@ const authorization = require("../middleware/authorization");
 const stockcheck = require('../middleware/stockcheck');
 const { v4: uuidv4} = require('uuid'); 
 
-const DOMAIN = `http://localhost:${process.env.PORT}`;
+const DOMAIN = process.env.BACK_END_ADDRESS;
 
 router.post("/", authcheck, authorization, stockcheck, async (req, res) => {
     try {
