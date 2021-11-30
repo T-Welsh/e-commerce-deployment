@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 
 const ProductOverview = (productDetails) => {
 
-    //const { REACT_APP_BACK_END_ADDRESS } = process.env;
+    const { REACT_APP_BACK_END_ADDRESS } = process.env;
 
     const id = productDetails.productdetails.product_id;
     const name = productDetails.productdetails.product_name;
@@ -53,7 +53,7 @@ const ProductOverview = (productDetails) => {
 
     return(
         <Fragment>
-                <img src={`/resources/productImages/${id}/${id}_1.jpg`} alt={name} className="productListImg" />
+                <img src={`/productImages/${id}/${id}_1.jpg`} alt={name} className="productListImg" />
                 <div className="nameAndPriceContainer">
                     <h3 className="productListName">{name}. . .</h3>
                     <p className="productListPrice">{price}</p> 

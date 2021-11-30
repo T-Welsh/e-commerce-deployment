@@ -20,7 +20,7 @@ const CartLineItem = ({product, setCart}) => {
             "cart": cart
         }
         try {
-            const response = await fetch(`http://localhost:5000/cart`, {
+            const response = await fetch(`/cart`, {
                         method: "POST",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
@@ -54,7 +54,7 @@ const CartLineItem = ({product, setCart}) => {
             "cart": cart
         }
         try {
-            const response = await fetch(`http://localhost:5000/cart`, {
+            const response = await fetch(`/cart`, {
                         method: "PUT",
                         headers: {
                         "content-type" : "application/json;charset=UTF-8",
@@ -75,7 +75,7 @@ const CartLineItem = ({product, setCart}) => {
     return(
         <Fragment>
             <div className="lineItem">
-                <img src={`http://localhost:5000/resources/productImages/${product.product_id}/${product.product_id}_1.jpg`} alt={product.product_name} />
+                <img src={`/productImages/${product.product_id}/${product.product_id}_1.jpg`} alt={product.product_name} />
                 <div className="cartLineItemTextContainer">
                     <p>{product.product_name}. . .</p>
                     <p>{product.product_price}</p>

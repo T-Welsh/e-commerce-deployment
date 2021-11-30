@@ -7,7 +7,7 @@ const authorization = require("../middleware/authorization");
 router.get("/", authorization, async (req, res) => {
     try {
         const cartItems = await pool.query("SELECT cart.product_id, quantity, product_name, product_price, product_description FROM cart JOIN products ON cart.product_id = products.product_id WHERE user_id = $1", [req.user]);
-        cartItems.rows.sort((a, b) => parseFloat(b.product_id) - parseFloat(a.product_id));
+        cartItems.rows.sort((a, b) => parseFloat(a.product_id) - parseFloat(b.product_id));
         res.json(cartItems.rows);
     } catch (err) {
         console.error(err.message);

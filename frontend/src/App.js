@@ -1,5 +1,5 @@
 import './App.css';
-import { HashRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Dashboard from './routes/dashboard/dashboard';
 import Login from './routes/login/login';
 import Register from './routes/register/resgister';
@@ -53,7 +53,7 @@ function App() {
 
   return (
     <Fragment>
-      <Router>
+      <Router basename='/frontend/build/index.html'>
         <div className="appContainer">
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/home" />} />

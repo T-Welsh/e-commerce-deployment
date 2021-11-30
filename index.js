@@ -24,7 +24,8 @@ if(process.env.nodeENV === "production"){
     app.use(express.static(path.join(__dirname, "frontend/build")));
 }else{
     //app.use(express.static(path.join(__dirname, "resources")));
-    app.use(express.static(__dirname));
+    //app.use(express.static(__dirname));
+    app.use(express.static(path.join(__dirname, "frontend/build")));
 }
 
 //initialize passport
@@ -54,9 +55,10 @@ app.get("/*", (req,res) => {
     res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
 });
 */
-app.get("*", (req,res) => {
+app.get("/*", (req,res) => {
     //res.redirect(process.env.FRONT_END_ADDRESS);
-    res.sendFile(path.join(__dirname, 'frontend/build/index.html'));
+    console.log('Check');
+    res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html'));
 });
 //END ROUTES
 
