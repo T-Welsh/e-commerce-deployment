@@ -94,12 +94,14 @@
 
 .imagePreview {
     width: 100px;
+    height: 100px;
 }
 
 @media only screen and (min-width: 414px) {
 
     .imagePreview {
         width: 140px;
+        height: 140px
     }
 
 }
