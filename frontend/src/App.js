@@ -12,6 +12,7 @@ import OrderDetail from './routes/orderDetail/orderDetail';
 import Terms from "./routes/terms/terms";
 import About from "./routes/about/about";
 import Returns from "./routes/returns/returns";
+require('dotenv').config();
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -22,13 +23,13 @@ function App() {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [department, setDepartment] = useState('');
-
+  const { REACT_APP_BACK_END_ADDRESS } = process.env;
   //retrive JWT token from local storage and send to server for verification
   const verifyAuth = async (/*user*/) => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`http://localhost:5000/auth/is-verify`, {
+      const response = await fetch(`${REACT_APP_BACK_END_ADDRESS}/auth/is-verify`, {
                   method: "GET",
                   headers: {
                     "content-type" : "application/json;charset=UTF-8",
