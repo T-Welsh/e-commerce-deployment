@@ -24,7 +24,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [department, setDepartment] = useState('');
   //retrive JWT token from local storage and send to server for verification
-  const verifyAuth = async (/*user*/) => {
+  /*const verifyAuth = async (/*user) => {
     try {
       const token = localStorage.getItem("token");
 
@@ -50,7 +50,7 @@ function App() {
   useEffect(() => {
     verifyAuth();
   });
-
+*/
   return (
     <Fragment>
       <Router basename='/frontend/build/index.html'>
