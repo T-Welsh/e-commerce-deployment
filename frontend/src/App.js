@@ -28,7 +28,7 @@ function App() {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(`http://localhost:5000/auth/is-verify`, {
+      const response = await fetch(`/auth/is-verify`, {
                   method: "GET",
                   headers: {
                     "content-type" : "application/json;charset=UTF-8",
