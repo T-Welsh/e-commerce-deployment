@@ -7,7 +7,7 @@ import Footer from "../../components/footer/Footer";
 const Login = ({isAuthenticated, setAuth, setSearchTerm, setDepartment}) => {
 
     const { REACT_APP_BACK_END_ADDRESS } = process.env;
-    console.log(`Back end address is ${REACT_APP_BACK_END_ADDRESS}`);
+    //console.log(`Back end address is ${REACT_APP_BACK_END_ADDRESS}`);
 
     const [credentialsValid, setCredentialsValid] = useState(true);
 
