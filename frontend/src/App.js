@@ -43,7 +43,7 @@ function App() {
                 setAuth(true);
               }
     } catch (err) {
-      console.error(err.message);
+      
     }
     
   };
